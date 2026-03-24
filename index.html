@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Tetris</title>
+    <!-- SEO Best Practices -->
+    <meta name="description" content="A classic Neon-styled Tetris web game built with vanilla technologies.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Left Panel: Stats -->
+        <div class="side-panel left-panel">
+            <div class="panel-box">
+                <h2>SCORE</h2>
+                <div id="score">0</div>
+            </div>
+            <div class="panel-box">
+                <h2>LEVEL</h2>
+                <div id="level">1</div>
+            </div>
+            <div class="panel-box">
+                <h2>LINES</h2>
+                <div id="lines">0</div>
+            </div>
+        </div>
+
+        <!-- Center: Game Board -->
+        <div class="canvas-container">
+            <canvas id="tetris" width="300" height="600"></canvas>
+            <div id="game-overlay" class="overlay">
+                <h1 id="overlay-title">NEON TETRIS</h1>
+                <p id="overlay-msg">Press SPACE to Start</p>
+                <button id="start-btn">START GAME</button>
+            </div>
+        </div>
+
+        <!-- Right Panel: Next Piece & Controls -->
+        <div class="side-panel right-panel">
+            <div class="panel-box">
+                <h2>NEXT</h2>
+                <canvas id="next-piece" width="120" height="120"></canvas>
+            </div>
+            <div class="controls-hint">
+                <h3>CONTROLS</h3>
+                <p><span>↑</span> Rotate</p>
+                <p><span>←</span> <span>→</span> Move</p>
+                <p><span>↓</span> Soft Drop</p>
+                <p><span>SPACE</span> Hard Drop</p>
+                <p><span>P</span> Pause</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
