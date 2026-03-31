@@ -1,0 +1,29 @@
+{
+  "name": "alstjrdl",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000T\u0000e\u0000t\u0000r\u0000i\u0000s\u0000\r\u0000 \u0000#\u0000 \u0000T\u0000e\u0000t\u0000r\u0000i\u0000s\u0000\r\u0000 \u0000",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rlaalstjrdl/Tetris.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rlaalstjrdl/Tetris/issues"
+  },
+  "homepage": "https://github.com/rlaalstjrdl/Tetris#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.11",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2"
+  }
+}

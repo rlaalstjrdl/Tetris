@@ -390,7 +390,7 @@ document.getElementById('ctrl-rotate').addEventListener('click', () => playerRot
 
 // Keyboard
 document.addEventListener('keydown', event => {
-    if (isGameOver || isPaused || !screens.game.classList.contains('active')) return;
+    if (isGameOver || isPaused || screens.game.classList.contains('hidden')) return;
     if (event.code === 'ArrowLeft') playerMove(-1);
     else if (event.code === 'ArrowRight') playerMove(1);
     else if (event.code === 'ArrowDown') playerDrop();

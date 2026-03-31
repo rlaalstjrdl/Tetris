@@ -10,80 +10,13 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕹️</text></svg>">
     
     <!-- Scripts & Fonts -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="dist/output.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
     <link rel="stylesheet" href="style.css">
 
-    <script id="tailwind-config">
-          tailwind.config = {
-            darkMode: "class",
-            theme: {
-              extend: {
-                colors: {
-                  "secondary": "#ff56ec",
-                  "error-container": "#9f0519",
-                  "surface-container-low": "#131319",
-                  "on-primary-container": "#005359",
-                  "primary-dim": "#00deec",
-                  "outline": "#76747b",
-                  "inverse-primary": "#006a71",
-                  "surface": "#0e0e13",
-                  "on-error-container": "#ffa8a3",
-                  "on-tertiary-fixed": "#294300",
-                  "on-tertiary": "#3d6100",
-                  "surface-tint": "#8ff5ff",
-                  "on-secondary-container": "#fff5f9",
-                  "primary-fixed-dim": "#00deec",
-                  "on-secondary-fixed": "#63005d",
-                  "on-surface-variant": "#acaab1",
-                  "surface-container-highest": "#25252d",
-                  "on-background": "#f9f5fd",
-                  "on-secondary": "#41003c",
-                  "primary-fixed": "#00eefc",
-                  "surface-container": "#19191f",
-                  "inverse-on-surface": "#55545b",
-                  "on-error": "#490006",
-                  "tertiary": "#bcff5f",
-                  "tertiary-container": "#a2f31f",
-                  "background": "#0e0e13",
-                  "primary": "#8ff5ff",
-                  "tertiary-fixed-dim": "#95e400",
-                  "surface-container-lowest": "#000000",
-                  "error-dim": "#d7383b",
-                  "surface-variant": "#25252d",
-                  "secondary-dim": "#ff56ec",
-                  "surface-bright": "#2c2b33",
-                  "secondary-fixed": "#ffbdee",
-                  "tertiary-fixed": "#a2f31f",
-                  "on-primary-fixed": "#003f43",
-                  "on-primary-fixed-variant": "#005e64",
-                  "on-tertiary-container": "#365700",
-                  "secondary-container": "#ab00a1",
-                  "on-tertiary-fixed-variant": "#3d6200",
-                  "error": "#ff716c",
-                  "on-primary": "#005d63",
-                  "inverse-surface": "#fcf8ff",
-                  "on-secondary-fixed-variant": "#94008b",
-                  "on-surface": "#f9f5fd",
-                  "surface-dim": "#0e0e13",
-                  "tertiary-dim": "#95e400",
-                  "outline-variant": "#48474d",
-                  "secondary-fixed-dim": "#ffa7ec",
-                  "surface-container-high": "#1f1f26",
-                  "primary-container": "#00eefc"
-                },
-                fontFamily: {
-                  "headline": ["Space Grotesk"],
-                  "body": ["Manrope"],
-                  "label": ["Space Grotesk"]
-                },
-                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-              },
-            },
-          }
-    </script>
+    <!-- Tailwind Config moved to tailwind.config.js -->
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
 
@@ -184,11 +117,11 @@
         </div>
     </aside>
 
-    <!-- Mobile Controls -->
-    <div class="fixed bottom-24 w-full px-6 md:hidden z-40">
+    <!-- Game Controls visibility fix: Always show on gameplay screen -->
+    <div class="fixed bottom-24 w-full px-6 z-40">
         <div class="flex justify-between items-end max-w-md mx-auto">
-            <div class="grid grid-cols-3 gap-4">
-                <div class="col-start-2"></div>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="col-span-3 h-2"></div> <!-- Spacer -->
                 <button id="ctrl-left" class="w-16 h-16 rounded-full control-btn flex items-center justify-center text-primary/80">
                     <span class="material-symbols-outlined text-3xl">keyboard_arrow_left</span>
                 </button>
