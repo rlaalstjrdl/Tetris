@@ -348,8 +348,13 @@ function gameOver() {
 
 // Screen Management
 function showScreen(screenId) {
-    Object.values(screens).forEach(screen => screen.classList.remove('active'));
-    screens[screenId].classList.add('active');
+    Object.keys(screens).forEach(key => {
+        if (key === screenId) {
+            screens[key].classList.remove('hidden');
+        } else {
+            screens[key].classList.add('hidden');
+        }
+    });
     
     // Show/Hide bottom nav state
     if (screenId === 'game') {
