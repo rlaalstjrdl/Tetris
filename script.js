@@ -102,9 +102,18 @@ function collide(board, player) {
     const [m, o] = [player.matrix, player.pos];
     for (let y = 0; y < m.length; ++y) {
         for (let x = 0; x < m[y].length; ++x) {
-            if (m[y][x] !== 0 &&
-               (board[y + o.y] && board[y + o.y][x + o.x]) !== 0) {
-                return true;
+            if (m[y][x] !== 0) {
+                const boardY = y + o.y;
+                const boardX = x + o.x;
+                // Allow pieces at Y < 0 as empty space
+                if (boardY < 0) {
+                    if (boardX < 0 || boardX >= cols) return true; // Horizontal wall
+                    continue;
+                }
+                // Regular board collision
+                if (!board[boardY] || board[boardY][boardX] !== 0) {
+                    return true;
+                }
             }
         }
     }
@@ -184,9 +193,20 @@ function playerReset() {
     if (nextMatrix === null) nextMatrix = createPiece();
     player.matrix = nextMatrix;
     nextMatrix = createPiece();
-    player.pos.y = 0;
+    
+    // Find first non-empty row to spawn accurately
+    let firstRow = 0;
+    for (let y = 0; y < player.matrix.length; y++) {
+        if (player.matrix[y].some(val => val !== 0)) {
+            firstRow = y;
+            break;
+        }
+    }
+    
+    player.pos.y = -firstRow; // Offset spawn y relative to first block
     player.pos.x = Math.floor(cols / 2) - Math.floor(player.matrix[0].length / 2);
     canHold = true;
+    
     if (collide(board, player)) {
         gameOver();
     }
@@ -328,13 +348,15 @@ function update(time = 0) {
 }
 
 function resetGame() {
+    isGameOver = false; 
+    isPaused = false;
+    gameOverOverlay.classList.add('hidden'); // Clear first
     board = Array.from({length: rows}, () => new Array(cols).fill(0));
     score = 0; level = 1; linesAmt = 0;
-    dropInterval = 1000; isGameOver = false; isPaused = false;
+    dropInterval = 1000;
     updateStats();
     nextMatrix = null;
-    playerReset();
-    gameOverOverlay.classList.add('hidden');
+    playerReset(); // Then spawn
 }
 
 function startGame() {
