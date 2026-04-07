@@ -115,7 +115,11 @@ function merge(board, player) {
     player.matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
-                board[y + player.pos.y][x + player.pos.x] = value;
+                const boardY = y + player.pos.y;
+                const boardX = x + player.pos.x;
+                if (board[boardY]) {
+                    board[boardY][boardX] = value;
+                }
             }
         });
     });
@@ -151,8 +155,8 @@ function playerDrop() {
     if (collide(board, player)) {
         player.pos.y--;
         merge(board, player);
-        playerReset();
         arenaSweep();
+        playerReset();
         updateStats();
     }
     dropCounter = 0;
@@ -164,8 +168,8 @@ function playerHardDrop() {
     }
     player.pos.y--;
     merge(board, player);
-    playerReset();
     arenaSweep();
+    playerReset();
     updateStats();
 }
 
@@ -200,6 +204,9 @@ function playerHold() {
         holdMatrix = temp;
         player.pos.y = 0;
         player.pos.x = Math.floor(cols / 2) - Math.floor(player.matrix[0].length / 2);
+        if (collide(board, player)) {
+            gameOver();
+        }
     }
     canHold = false;
     drawHold();
