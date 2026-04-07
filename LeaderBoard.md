@@ -93,7 +93,7 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
 <!-- TopAppBar Shell -->
 <header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
@@ -112,6 +112,11 @@
 <span class="font-label text-xs tracking-[0.3em] text-primary opacity-60 uppercase mb-2 block">GLOBAL RANKINGS</span>
 <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">HALL OF <span class="text-primary neon-glow-primary">FAME</span></h2>
 <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent rounded-full"></div>
+</div><div class="mb-8 relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary/60 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+</div>
+<input class="w-full bg-[#131319]/60 border border-primary/20 rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all font-body tracking-wide shadow-[0_0_15px_rgba(0,240,255,0.05)] focus:shadow-[0_0_20px_rgba(0,240,255,0.15)] backdrop-blur-md" placeholder="Search player..." type="text"/>
 </div>
 <!-- Top 3 Podium (Visual Asymmetry) -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

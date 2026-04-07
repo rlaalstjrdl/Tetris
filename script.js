@@ -64,6 +64,7 @@ const holdCtx = holdCanvas.getContext('2d');
 const gameOverOverlay = document.getElementById('game-over-overlay');
 const finalScore = document.getElementById('final-score');
 const finalLines = document.getElementById('final-lines');
+const finalLevel = document.getElementById('final-level');
 
 // UI Buttons
 const startBtn = document.getElementById('start-game-card');
@@ -343,6 +344,7 @@ function gameOver() {
     cancelAnimationFrame(rAF);
     finalScore.innerText = score.toLocaleString();
     finalLines.innerText = linesAmt;
+    if (finalLevel) finalLevel.innerText = level;
     gameOverOverlay.classList.remove('hidden');
 }
 
