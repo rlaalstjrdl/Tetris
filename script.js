@@ -2,7 +2,7 @@
 const rows = 20;
 const cols = 10;
 
-// Tetromino Matrices
+// Tetromino Matrices and Colors
 const SHAPES = [
     [],
     [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]], // I - Cyan
@@ -14,15 +14,15 @@ const SHAPES = [
     [[7,7,0],[0,7,7],[0,0,0]]                 // Z - Red
 ];
 
-const COLOR_CLASSES = [
+const COLORS = [
     '',
-    'block-cyan',
-    'block-blue',
-    'block-orange',
-    'block-yellow',
-    'block-green',
-    'block-purple',
-    'block-red'
+    '#00FFFF', // I - Cyan
+    '#0000FF', // J - Blue
+    '#FF8C00', // L - Orange
+    '#FFD700', // O - Yellow
+    '#32CD32', // S - Green
+    '#9370DB', // T - Purple
+    '#FF0000'  // Z - Red
 ];
 
 // Game State
@@ -48,42 +48,36 @@ let canHold = true;
 
 // DOM Elements
 const screens = {
-    main: document.getElementById('main-menu-screen'),
-    game: document.getElementById('game-play-screen'),
-    leaderboard: document.getElementById('leaderboard-screen')
+    menu: document.getElementById('screen-menu'),
+    game: document.getElementById('screen-game'),
+    leaderboard: document.getElementById('screen-leaderboard')
 };
 
 const boardContainer = document.getElementById('game-board-container');
 const scoreVal = document.getElementById('score-val');
 const levelVal = document.getElementById('level-val');
-const linesVal = document.getElementById('lines-val');
 const nextCanvas = document.getElementById('next-canvas');
 const nextCtx = nextCanvas.getContext('2d');
-const holdCanvas = document.getElementById('hold-canvas');
-const holdCtx = holdCanvas.getContext('2d');
 const gameOverOverlay = document.getElementById('game-over-overlay');
 const finalScore = document.getElementById('final-score');
 const finalLines = document.getElementById('final-lines');
-const finalLevel = document.getElementById('final-level');
 
 // UI Buttons
-const startBtn = document.getElementById('start-game-card');
+const playNowBtn = document.getElementById('play-now-btn');
+const mobilePlayBtn = document.getElementById('mobile-play-btn');
 const replayBtn = document.getElementById('replay-btn');
 const menuBackBtn = document.getElementById('menu-back-btn');
-const navMenuBtn = document.getElementById('menu-btn');
-const navLeaderboardBtn = document.getElementById('nav-leaderboard-btn');
-const footerPlayBtn = document.getElementById('footer-play-btn');
-const footerLeaderboardBtn = document.getElementById('footer-leaderboard-btn');
-const leaderboardCard = document.getElementById('leaderboard-card');
+const navLinks = document.querySelectorAll('.nav-link');
 
 // Initialize DOM Grid
 const gridCells = [];
 function initGrid() {
-    boardContainer.innerHTML = '<div class="absolute inset-0 scanline-grid z-10 opacity-40"></div>';
+    boardContainer.innerHTML = ''; // Clear any placeholders
+    gridCells.length = 0; // Reset array
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             const cell = document.createElement('div');
-            cell.className = 'game-grid-cell';
+            // We'll use a container div to hold the solid-cube when value exists
             boardContainer.appendChild(cell);
             gridCells.push(cell);
         }
@@ -105,12 +99,10 @@ function collide(board, player) {
             if (m[y][x] !== 0) {
                 const boardY = y + o.y;
                 const boardX = x + o.x;
-                // Allow pieces at Y < 0 as empty space
                 if (boardY < 0) {
-                    if (boardX < 0 || boardX >= cols) return true; // Horizontal wall
+                    if (boardX < 0 || boardX >= cols) return true;
                     continue;
                 }
-                // Regular board collision
                 if (!board[boardY] || board[boardY][boardX] !== 0) {
                     return true;
                 }
@@ -163,6 +155,10 @@ function playerDrop() {
     player.pos.y++;
     if (collide(board, player)) {
         player.pos.y--;
+        if (player.pos.y < 0) {
+            gameOver();
+            return;
+        }
         merge(board, player);
         arenaSweep();
         playerReset();
@@ -176,6 +172,10 @@ function playerHardDrop() {
         player.pos.y++;
     }
     player.pos.y--;
+    if (player.pos.y < 0) {
+        gameOver();
+        return;
+    }
     merge(board, player);
     arenaSweep();
     playerReset();
@@ -194,7 +194,6 @@ function playerReset() {
     player.matrix = nextMatrix;
     nextMatrix = createPiece();
     
-    // Find first non-empty row to spawn accurately
     let firstRow = 0;
     for (let y = 0; y < player.matrix.length; y++) {
         if (player.matrix[y].some(val => val !== 0)) {
@@ -203,7 +202,7 @@ function playerReset() {
         }
     }
     
-    player.pos.y = -firstRow; // Offset spawn y relative to first block
+    player.pos.y = -firstRow;
     player.pos.x = Math.floor(cols / 2) - Math.floor(player.matrix[0].length / 2);
     canHold = true;
     
@@ -229,7 +228,6 @@ function playerHold() {
         }
     }
     canHold = false;
-    drawHold();
 }
 
 function arenaSweep() {
@@ -252,50 +250,67 @@ function arenaSweep() {
 function updateStats() {
     scoreVal.innerText = score.toLocaleString();
     levelVal.innerText = level;
-    linesVal.innerText = linesAmt;
 }
 
-// Rendering
+// Rendering Logic (Updated for DOM-based solid-cube)
 function draw() {
-    // Clear styles
+    // 1. Clear 
     gridCells.forEach(cell => {
-        cell.className = 'game-grid-cell';
+        cell.innerHTML = '';
+        cell.className = '';
     });
 
-    // Draw board
-    board.forEach((row, y) => {
-        row.forEach((value, x) => {
+    // 2. Draw Board
+    board.forEach((row, ys) => {
+        row.forEach((value, xs) => {
             if (value !== 0) {
-                gridCells[y * cols + x].classList.add('neon-block', COLOR_CLASSES[value]);
+                const idx = ys * cols + xs;
+                if (gridCells[idx]) {
+                    const cube = document.createElement('div');
+                    cube.className = 'solid-cube';
+                    cube.style.setProperty('--block-color', COLORS[value]);
+                    gridCells[idx].appendChild(cube);
+                }
             }
         });
     });
 
-    // Draw player and ghost
+    // 3. Draw Player and Ghost
     if (player.matrix) {
-        // Ghost
+        // Ghost for helper
         let ghostY = player.pos.y;
         while(!collide(board, {matrix: player.matrix, pos: {x: player.pos.x, y: ghostY}})) {
             ghostY++;
         }
         ghostY--;
-        player.matrix.forEach((row, y) => {
-            row.forEach((value, x) => {
+
+        // Draw Ghost (Low opacity)
+        player.matrix.forEach((row, yp) => {
+            row.forEach((value, xp) => {
                 if (value !== 0) {
-                    const idx = (ghostY + y) * cols + (player.pos.x + x);
-                    if (gridCells[idx]) gridCells[idx].classList.add('neon-block', COLOR_CLASSES[value], 'opacity-20');
+                    const idx = (ghostY + yp) * cols + (player.pos.x + xp);
+                    if (gridCells[idx] && gridCells[idx].innerHTML === '') {
+                        const cube = document.createElement('div');
+                        cube.className = 'solid-cube opacity-20';
+                        cube.style.setProperty('--block-color', COLORS[value]);
+                        gridCells[idx].appendChild(cube);
+                    }
                 }
             });
         });
 
-        // Player
-        player.matrix.forEach((row, y) => {
-            row.forEach((value, x) => {
+        // Draw Current Piece
+        player.matrix.forEach((row, yp) => {
+            row.forEach((value, xp) => {
                 if (value !== 0) {
-                    const idx = (player.pos.y + y) * cols + (player.pos.x + x);
+                    const idx = (player.pos.y + yp) * cols + (player.pos.x + xp);
                     if (gridCells[idx]) {
-                        gridCells[idx].classList.remove('opacity-20');
-                        gridCells[idx].classList.add('neon-block', COLOR_CLASSES[value]);
+                        gridCells[idx].innerHTML = ''; // Overwrite ghost
+                        gridCells[idx].classList.add('piece-active');
+                        const cube = document.createElement('div');
+                        cube.className = 'solid-cube';
+                        cube.style.setProperty('--block-color', COLORS[value]);
+                        gridCells[idx].appendChild(cube);
                     }
                 }
             });
@@ -304,33 +319,21 @@ function draw() {
 }
 
 function drawNext() {
-    const size = 20;
+    const size = 18;
     nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+    if (!nextMatrix) return;
+    
     const offsetX = (nextCanvas.width - nextMatrix[0].length * size) / 2;
     const offsetY = (nextCanvas.height - nextMatrix.length * size) / 2;
     
-    // Canvas rendering for next piece (simpler)
     nextMatrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
-                nextCtx.fillStyle = '#8ff5ff'; // Simplify to primary for small preview
-                nextCtx.fillRect(offsetX + x * size, offsetY + y * size, size - 2, size - 2);
-            }
-        });
-    });
-}
-
-function drawHold() {
-    const size = 18;
-    holdCtx.clearRect(0, 0, holdCanvas.width, holdCanvas.height);
-    if (!holdMatrix) return;
-    const offsetX = (holdCanvas.width - holdMatrix[0].length * size) / 2;
-    const offsetY = (holdCanvas.height - holdMatrix.length * size) / 2;
-    holdMatrix.forEach((row, y) => {
-        row.forEach((value, x) => {
-            if (value !== 0) {
-                holdCtx.fillStyle = '#bcff5f'; // Lime for hold
-                holdCtx.fillRect(offsetX + x * size, offsetY + y * size, size - 2, size - 2);
+                nextCtx.fillStyle = COLORS[value];
+                nextCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+                nextCtx.lineWidth = 1;
+                nextCtx.fillRect(offsetX + x * size, offsetY + y * size, size - 1, size - 1);
+                nextCtx.strokeRect(offsetX + x * size, offsetY + y * size, size - 1, size - 1);
             }
         });
     });
@@ -338,7 +341,7 @@ function drawHold() {
 
 // Game Flow
 function update(time = 0) {
-    if (isPaused || isGameOver) return;
+    if (isPaused || isGameOver || screens.game.classList.contains('hidden')) return;
     const deltaTime = time - lastTime;
     lastTime = time;
     dropCounter += deltaTime;
@@ -350,19 +353,17 @@ function update(time = 0) {
 function resetGame() {
     isGameOver = false; 
     isPaused = false;
-    gameOverOverlay.classList.add('hidden'); // Clear first
+    gameOverOverlay.classList.add('hidden');
     board = Array.from({length: rows}, () => new Array(cols).fill(0));
     score = 0; level = 1; linesAmt = 0;
     dropInterval = 1000;
     updateStats();
     nextMatrix = null;
-    playerReset(); // Then spawn
+    playerReset();
 }
 
 function startGame() {
     showScreen('game');
-    holdMatrix = null;
-    drawHold();
     resetGame();
     lastTime = performance.now();
     update();
@@ -373,11 +374,10 @@ function gameOver() {
     cancelAnimationFrame(rAF);
     finalScore.innerText = score.toLocaleString();
     finalLines.innerText = linesAmt;
-    if (finalLevel) finalLevel.innerText = level;
     gameOverOverlay.classList.remove('hidden');
 }
 
-// Screen Management
+// Global Screen Management
 function showScreen(screenId) {
     Object.keys(screens).forEach(key => {
         if (key === screenId) {
@@ -386,40 +386,36 @@ function showScreen(screenId) {
             screens[key].classList.add('hidden');
         }
     });
-    
-    // Show/Hide bottom nav state
-    if (screenId === 'game') {
-        footerPlayBtn.classList.add('scale-110', 'text-[#00F0FF]');
-        footerLeaderboardBtn.classList.remove('scale-110', 'text-[#00F0FF]');
-    } else if (screenId === 'leaderboard') {
-        footerLeaderboardBtn.classList.add('scale-110', 'text-[#00F0FF]');
-        footerPlayBtn.classList.remove('scale-110', 'text-[#00F0FF]');
-    } else {
-        footerPlayBtn.classList.remove('scale-110', 'text-[#00F0FF]');
-        footerLeaderboardBtn.classList.remove('scale-110', 'text-[#00F0FF]');
+
+    // Reset game state if not in game
+    if (screenId !== 'game') {
+        isGameOver = true;
+        cancelAnimationFrame(rAF);
     }
 }
 
-// Event Listeners
-startBtn.addEventListener('click', startGame);
+// Bind Events
+playNowBtn.addEventListener('click', startGame);
+mobilePlayBtn.addEventListener('click', startGame);
 replayBtn.addEventListener('click', startGame);
-menuBackBtn.addEventListener('click', () => {
-    gameOverOverlay.classList.add('hidden');
-    showScreen('main');
-});
-navMenuBtn.addEventListener('click', () => showScreen('main'));
-navLeaderboardBtn.addEventListener('click', () => showScreen('leaderboard'));
-leaderboardCard.addEventListener('click', () => showScreen('leaderboard'));
-footerPlayBtn.addEventListener('click', startGame);
-footerLeaderboardBtn.addEventListener('click', () => showScreen('leaderboard'));
+menuBackBtn.addEventListener('click', () => showScreen('menu'));
 
-// Touch Controls
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const target = link.dataset.target;
+        showScreen(target);
+    });
+});
+
+// Controls
 document.getElementById('ctrl-left').addEventListener('click', () => playerMove(-1));
 document.getElementById('ctrl-right').addEventListener('click', () => playerMove(1));
 document.getElementById('ctrl-down').addEventListener('click', () => playerDrop());
+document.getElementById('ctrl-up').addEventListener('click', () => playerRotate(1));
 document.getElementById('ctrl-rotate').addEventListener('click', () => playerRotate(1));
+document.getElementById('ctrl-hard-drop').addEventListener('click', () => playerHardDrop());
+document.getElementById('ctrl-hold').addEventListener('click', () => playerHold());
 
-// Keyboard
 document.addEventListener('keydown', event => {
     if (isGameOver || isPaused || screens.game.classList.contains('hidden')) return;
     if (event.code === 'ArrowLeft') playerMove(-1);
@@ -430,6 +426,6 @@ document.addEventListener('keydown', event => {
     else if (event.code === 'KeyC') playerHold();
 });
 
-// Initialization
+// Start at menu
 initGrid();
-showScreen('main');
+showScreen('menu');

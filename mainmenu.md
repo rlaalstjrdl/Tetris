@@ -3,284 +3,266 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "secondary": "#ff56ec",
-            "error-container": "#9f0519",
-            "surface-container-low": "#131319",
-            "on-primary-container": "#005359",
-            "primary-dim": "#00deec",
-            "outline": "#76747b",
-            "inverse-primary": "#006a71",
-            "surface": "#0e0e13",
-            "on-error-container": "#ffa8a3",
-            "on-tertiary-fixed": "#294300",
-            "on-tertiary": "#3d6100",
-            "surface-tint": "#8ff5ff",
-            "on-secondary-container": "#fff5f9",
-            "primary-fixed-dim": "#00deec",
-            "on-secondary-fixed": "#63005d",
-            "on-surface-variant": "#acaab1",
-            "surface-container-highest": "#25252d",
-            "on-background": "#f9f5fd",
-            "on-secondary": "#41003c",
-            "primary-fixed": "#00eefc",
-            "surface-container": "#19191f",
-            "inverse-on-surface": "#55545b",
-            "on-error": "#490006",
-            "tertiary": "#bcff5f",
-            "tertiary-container": "#a2f31f",
-            "background": "#0e0e13",
-            "primary": "#8ff5ff",
-            "tertiary-fixed-dim": "#95e400",
-            "surface-container-lowest": "#000000",
-            "error-dim": "#d7383b",
-            "surface-variant": "#25252d",
-            "secondary-dim": "#ff56ec",
-            "surface-bright": "#2c2b33",
-            "secondary-fixed": "#ffbdee",
-            "tertiary-fixed": "#a2f31f",
-            "on-primary-fixed": "#003f43",
-            "on-primary-fixed-variant": "#005e64",
-            "on-tertiary-container": "#365700",
-            "secondary-container": "#ab00a1",
-            "on-tertiary-fixed-variant": "#3d6200",
-            "error": "#ff716c",
-            "on-primary": "#005d63",
-            "inverse-surface": "#fcf8ff",
-            "on-secondary-fixed-variant": "#94008b",
-            "on-surface": "#f9f5fd",
-            "surface-dim": "#0e0e13",
-            "tertiary-dim": "#95e400",
-            "outline-variant": "#48474d",
-            "secondary-fixed-dim": "#ffa7ec",
-            "surface-container-high": "#1f1f26",
-            "primary-container": "#00eefc"
-          },
-          fontFamily: {
-            "headline": ["Space Grotesk"],
-            "body": ["Manrope"],
-            "label": ["Space Grotesk"]
-          },
-          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-        },
-      },
-    }
-  </script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      display: inline-block;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
-    }
-    .neon-grid {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(143, 245, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(143, 245, 255, 0.05) 1px, transparent 1px);
-      animation: grid-scroll 20s linear infinite;
-    }
-    @keyframes grid-scroll {
-      from { background-position: 0 0; }
-      to { background-position: 40px 40px; }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(var(--rot)); }
-      50% { transform: translateY(-20px) rotate(calc(var(--rot) + 5deg)); }
-    }
-    @keyframes pulse-primary {
-      0% { box-shadow: 0 0 0 0 rgba(143, 245, 255, 0.4); }
-      70% { box-shadow: 0 0 0 20px rgba(143, 245, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(143, 245, 255, 0); }
-    }
-    @keyframes neon-flicker {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        opacity: 1;
-        text-shadow: 0 0 10px rgba(143, 245, 255, 0.8), 0 0 20px rgba(143, 245, 255, 0.4);
-      }
-      20%, 22%, 24%, 55% {
-        opacity: 0.8;
-        text-shadow: none;
-      }
-    }
-    .floating-element {
-      animation: float 6s ease-in-out infinite;
-    }
-    .text-glow-layered {
-      text-shadow: 
-        0 0 10px rgba(143, 245, 255, 0.5),
-        0 0 20px rgba(143, 245, 255, 0.3),
-        0 0 30px rgba(143, 245, 255, 0.2);
-    }
-    .pulse-glow {
-      animation: pulse-primary 3s infinite;
-    }
-  </style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #0e0e13;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neon-glow-primary {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .neon-glow-secondary {
+            text-shadow: 0 0 10px rgba(201, 124, 255, 0.5), 0 0 20px rgba(201, 124, 255, 0.3);
+        }
+        .glass-panel {
+            background: rgba(37, 37, 45, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(143, 245, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(143, 245, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#76747b",
+                        "background": "#0e0e13",
+                        "on-secondary-fixed": "#530082",
+                        "on-secondary-container": "#fff5ff",
+                        "surface-container": "#19191f",
+                        "surface-dim": "#0e0e13",
+                        "outline-variant": "#48474d",
+                        "primary-fixed": "#00eefc",
+                        "surface": "#0e0e13",
+                        "on-secondary-fixed-variant": "#7c00c0",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-container": "#9000de",
+                        "on-tertiary-fixed-variant": "#0d6200",
+                        "inverse-primary": "#006a71",
+                        "primary-dim": "#00deec",
+                        "on-surface-variant": "#acaab1",
+                        "on-error": "#490006",
+                        "error": "#ff716c",
+                        "on-primary": "#005d63",
+                        "secondary-fixed-dim": "#e1b2ff",
+                        "on-tertiary": "#0d6100",
+                        "on-primary-container": "#005359",
+                        "tertiary": "#8eff71",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-background": "#f9f5fd",
+                        "primary": "#8ff5ff",
+                        "primary-container": "#00eefc",
+                        "inverse-on-surface": "#55545b",
+                        "tertiary-container": "#2ff801",
+                        "on-surface": "#f9f5fd",
+                        "error-dim": "#d7383b",
+                        "on-primary-fixed": "#003f43",
+                        "tertiary-fixed": "#2ff801",
+                        "surface-variant": "#25252d",
+                        "surface-bright": "#2c2b33",
+                        "secondary-dim": "#aa30fa",
+                        "surface-container-low": "#131319",
+                        "inverse-surface": "#fcf8ff",
+                        "tertiary-fixed-dim": "#2be800",
+                        "on-tertiary-fixed": "#064200",
+                        "on-secondary": "#350056",
+                        "secondary": "#c97cff",
+                        "surface-container-highest": "#25252d",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-dim": "#2be800",
+                        "on-tertiary-container": "#0b5800",
+                        "error-container": "#9f0519",
+                        "secondary-fixed": "#e9c4ff",
+                        "primary-fixed-dim": "#00deec",
+                        "surface-tint": "#8ff5ff",
+                        "surface-container-high": "#1f1f26"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
-</head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen overflow-hidden">
-<!-- Background Layer: Kinetic Neon Gallery -->
-<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-<div class="absolute inset-0 neon-grid opacity-30"></div>
-<!-- Floating Decorative Tetrominoes (Abstract/Asymmetric) -->
-<div class="absolute top-[15%] left-[10%] w-16 h-16 rounded-lg bg-primary/10 border border-primary/20 backdrop-blur-sm floating-element blur-[1px]" style="--glow-color: 143, 245, 255; --rot: -12deg; animation-delay: 0s;"></div>
-<div class="absolute bottom-[20%] right-[15%] w-24 h-12 rounded-lg bg-secondary/10 border border-secondary/20 backdrop-blur-sm floating-element blur-[2px]" style="--glow-color: 255, 86, 236; --rot: 45deg; animation-delay: 1s;"></div>
-<div class="absolute top-[60%] left-[5%] w-12 h-20 rounded-lg bg-tertiary/10 border border-tertiary/20 backdrop-blur-sm floating-element blur-[1px]" style="--glow-color: 188, 255, 95; --rot: 110deg; animation-delay: 2.5s;"></div>
-<!-- Particles / Floating Dots -->
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-<div class="w-2 h-2 rounded-full bg-primary/40 absolute top-1/4 left-1/3 blur-sm animate-pulse"></div>
-<div class="w-1 h-1 rounded-full bg-secondary/40 absolute bottom-1/3 right-1/4 blur-none animate-bounce" style="animation-duration: 4s;"></div>
-<div class="w-3 h-3 rounded-full bg-tertiary/20 absolute top-2/3 left-1/2 blur-md animate-pulse" style="animation-duration: 5s;"></div>
+  </head>
+<body class="font-body text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-0 grid-bg overflow-hidden">
+<!-- Falling Tetrominoes (Simulated visual elements) -->
+<div class="absolute top-[-100px] left-[10%] opacity-20 rotate-12">
+<div class="grid grid-cols-2 gap-1">
+<div class="w-10 h-10 bg-secondary rounded-sm shadow-[0_0_15px_#c97cff]"></div>
+<div class="w-10 h-10 bg-secondary rounded-sm shadow-[0_0_15px_#c97cff]"></div>
+<div class="w-10 h-10 bg-secondary rounded-sm shadow-[0_0_15px_#c97cff]"></div>
+<div class="w-10 h-10 bg-secondary rounded-sm shadow-[0_0_15px_#c97cff]"></div>
 </div>
-<!-- Large Ambient Glows -->
-<div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"></div>
-<div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]"></div>
 </div>
-<!-- Shared Component: TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
-<div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+<div class="absolute top-[20%] right-[15%] opacity-15 -rotate-45">
+<div class="flex flex-col gap-1">
+<div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+<div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+<div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+<div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+</div>
+</div>
+<div class="absolute bottom-[30%] left-[5%] opacity-10 rotate-180">
+<div class="grid grid-cols-3 gap-1">
+<div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+<div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+<div class="w-10 h-10 bg-transparent"></div>
+<div class="w-10 h-10 bg-transparent"></div>
+<div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+<div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+</div>
+</div>
+<!-- Gradient Overlay for Depth -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none"></div>
+</div>
+<!-- Navigation Shell (TopAppBar) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-[#0e0e13] dark:bg-[#0e0e13]">
 <div class="flex items-center gap-4">
-<button class="text-[#00F0FF] hover:scale-105 transition-transform duration-300 active:scale-95">
-<span class="material-symbols-outlined" data-icon="menu">menu</span>
-</button>
-<span class="font-headline tracking-widest uppercase text-sm text-[#00F0FF]">SYSTEM_OS</span>
+<span class="material-symbols-outlined text-[#00F0FF] cursor-pointer hover:text-[#8ff5ff] transition-colors active:scale-95 duration-100" data-icon="menu">menu</span>
+<div class="font-['Space_Grotesk'] text-2xl font-black italic tracking-tighter text-[#00F0FF] drop-shadow-[0_0_10px_rgba(0,240,255,0.5)] uppercase">
+                TETRIS NEON
+            </div>
 </div>
-<div class="text-xl font-bold tracking-tighter text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.5)] font-headline">
-        TETRIS NEON
-      </div>
 <div class="flex items-center gap-6">
-<nav class="hidden md:flex gap-8">
-<span class="font-headline text-sm tracking-widest text-[#00F0FF] drop-shadow-md cursor-default">HOME</span>
-<span class="font-headline text-sm tracking-widest text-[#f9f5fd]/40 hover:text-[#00F0FF] transition-colors cursor-pointer">ARCHIVE</span>
-</nav>
-<button class="text-[#00F0FF] hover:scale-105 transition-transform duration-300 active:scale-95">
-<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="hidden md:block font-['Space_Grotesk'] text-slate-500 tracking-tighter uppercase font-bold text-sm hover:text-[#8ff5ff] transition-colors cursor-pointer">HISTORY</span>
+<span class="hidden md:block font-['Space_Grotesk'] text-slate-500 tracking-tighter uppercase font-bold text-sm hover:text-[#8ff5ff] transition-colors cursor-pointer">STORE</span>
+<span class="material-symbols-outlined text-[#00F0FF] cursor-pointer hover:text-[#8ff5ff] transition-colors active:scale-95 duration-100" data-icon="settings">settings</span>
+</div>
+</header>
+<!-- Main Canvas Content -->
+<main class="relative z-10 min-h-screen flex flex-col items-center justify-center pt-24 pb-32 px-6">
+<!-- Hero Section -->
+<div class="w-full max-w-4xl flex flex-col items-center mb-16">
+<div class="relative group">
+<h1 class="font-headline text-[8rem] md:text-[12rem] font-black tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary-container to-secondary leading-none select-none drop-shadow-[0_0_40px_rgba(0,240,255,0.4)]">
+                    TETRIS
+                </h1>
+<div class="absolute -bottom-4 right-0 font-headline text-2xl font-bold tracking-[0.5em] text-secondary neon-glow-secondary opacity-80 uppercase">
+                    NEON KINETIC
+                </div>
+</div>
+</div>
+<!-- Menu Action Grid -->
+<div class="w-full max-w-md space-y-4">
+<!-- PRIMARY ACTION: PLAY -->
+<button class="w-full group relative overflow-hidden bg-gradient-to-r from-primary to-primary-container rounded-xl py-6 flex items-center justify-center shadow-[0_10px_30px_rgba(0,240,255,0.3)] hover:shadow-[0_15px_40px_rgba(0,240,255,0.5)] transition-all duration-300 active:scale-95">
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary text-3xl" data-icon="play_arrow" data-weight="fill">play_arrow</span>
+<span class="font-headline text-3xl font-black text-on-primary tracking-tighter uppercase">PLAY NOW</span>
+</div>
+</button>
+<!-- SECONDARY ACTIONS -->
+<div class="grid grid-cols-2 gap-4">
+<button class="glass-panel flex flex-col items-start justify-end p-6 rounded-xl min-h-[140px] group transition-all hover:bg-surface-container-highest active:scale-95 shadow-lg">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform" data-icon="leaderboard">leaderboard</span>
+<div>
+<span class="block font-headline text-lg font-bold text-on-surface uppercase tracking-tight">LEADERBOARD</span>
+<span class="block font-body text-xs text-on-surface-variant font-medium">Rank #1,204</span>
+</div>
+</button>
+<button class="glass-panel flex flex-col items-start justify-end p-6 rounded-xl min-h-[140px] group transition-all hover:bg-surface-container-highest active:scale-95 shadow-lg">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4 group-hover:scale-110 transition-transform" data-icon="sports_esports">sports_esports</span>
+<div>
+<span class="block font-headline text-lg font-bold text-on-surface uppercase tracking-tight">LEVELS</span>
+<span class="block font-body text-xs text-on-surface-variant font-medium">42 Unlocked</span>
+</div>
 </button>
 </div>
+<!-- TERTIARY ROW -->
+<button class="w-full glass-panel flex items-center justify-between px-6 py-5 rounded-xl group transition-all hover:bg-surface-container-highest active:scale-95">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+<span class="font-headline text-base font-bold text-on-surface uppercase tracking-wide">SYSTEM SETTINGS</span>
 </div>
-<div class="bg-gradient-to-b from-[#131319] to-transparent h-1"></div>
-</header>
-<!-- Main Content: Menu Canvas -->
-<main class="relative z-10 flex flex-col items-center justify-center min-h-screen pt-16 pb-24 px-6">
-<!-- Central Hero Branding -->
-<div class="mb-20 text-center">
-<div class="inline-block relative">
-<h1 class="font-headline text-7xl md:text-9xl font-bold tracking-tighter text-on-surface leading-none">
-<span class="block text-glow-layered opacity-90">TETRIS</span>
-<span class="text-primary block -mt-2 drop-shadow-[0_0_35px_rgba(143,245,255,0.6)] animate-[neon-flicker_4s_infinite]">NEON</span>
-</h1>
-<div class="absolute -right-8 top-4 md:-right-12 font-headline text-xs font-bold tracking-[0.3em] text-secondary uppercase vertical-text transform rotate-90 origin-left opacity-80">
-          V.2024.KINETIC
-        </div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
 </div>
-<div class="mt-8 flex flex-col items-center gap-2">
-<div class="h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
-<p class="font-headline text-sm tracking-[0.5em] text-on-surface/60 uppercase">Digital Art Installation</p>
-<div class="h-px w-12 bg-gradient-to-r from-transparent via-secondary/40 to-transparent"></div>
-</div>
-</div>
-<!-- Main Navigation Grid (Bento Style & Asymmetric) -->
-<div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-6">
-<!-- Primary Action: Start Game -->
-<div class="md:col-span-8 group cursor-pointer">
-<div class="relative overflow-hidden rounded-xl bg-primary-container p-8 h-48 flex flex-col justify-end transition-all duration-500 hover:scale-[1.03] pulse-glow">
-<!-- Animated background pattern for button -->
-<div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
-<div class="absolute top-6 right-6 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
-<span class="material-symbols-outlined text-6xl text-on-primary/30" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-</div>
+<!-- Bento Grid Stats (Decorative/Informational) -->
+<div class="w-full max-w-4xl mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-panel p-6 rounded-2xl flex flex-col justify-between overflow-hidden relative">
 <div class="relative z-10">
-<span class="font-headline text-xs tracking-widest text-on-primary-fixed/70 block mb-1 group-hover:translate-x-1 transition-transform">INITIALIZE_CORE</span>
-<h2 class="font-headline text-4xl font-bold text-on-primary uppercase tracking-tight group-hover:drop-shadow-[0_0_15px_rgba(0,63,67,0.4)] transition-all">START GAME</h2>
+<p class="font-label text-xs font-bold text-on-surface-variant tracking-[0.2em] mb-1">GLOBAL TOP SCORE</p>
+<p class="font-headline text-4xl font-black text-primary neon-glow-primary">2,485,000</p>
 </div>
-<!-- Decorative Tetromino in background of card -->
-<div class="absolute -bottom-4 right-20 w-32 h-16 bg-on-primary/10 rounded-lg rotate-12 transition-transform duration-700 group-hover:rotate-45 group-hover:scale-110"></div>
+<div class="mt-4 flex items-center gap-2 relative z-10">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" data-alt="Avatar of a legendary tetris player with neon gaming headphones and futuristic visor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADQgjudH5qJlbm8DbVZYjrCKXBHrqlAuq_j3zdZibrGNVx7IvbZJHLEByc_EERH9Qj-8Q1Eu6deHVfvVi2SQanee0wjP9VRDOIMSULXPmrIitexjdipKPZxG4F4a3DZrEz69IFCSKaXS3gq6hoM0Zy2R9x6jqyc5arMNeCPmfJ01XmIXTwbBHaNCbcLhTezQ8BId8RK2RS0KCj1a59eF7mIoX3yHnYjUGqh-yWEcvH80U9qtf8mwrZuScV2jsxVA4EHzffAMOcTA"/>
 </div>
+<span class="text-xs font-bold font-headline text-on-surface tracking-tight">NEON_RAVER_99</span>
 </div>
-<!-- Secondary: Leaderboard -->
-<div class="md:col-span-4 group cursor-pointer">
-<div class="h-48 rounded-xl bg-surface-container-high border border-outline-variant/10 p-6 flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-highest hover:border-secondary/30">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-secondary drop-shadow-[0_0_8px_rgba(255,86,236,0.4)]" data-icon="emoji_events">emoji_events</span>
-<span class="font-headline text-[10px] tracking-[0.2em] text-on-surface/30 uppercase">HIGH_SCORES</span>
-</div>
-<h3 class="font-headline text-xl font-bold tracking-tight text-on-surface group-hover:text-secondary transition-colors">LEADERBOARD</h3>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="military_tech">military_tech</span>
 </div>
 </div>
-<!-- Tertiary: Settings -->
-<div class="md:col-span-5 group cursor-pointer">
-<div class="h-40 rounded-xl bg-surface-container border border-outline-variant/10 p-6 flex flex-col justify-between transition-all duration-300 hover:border-primary/40 group overflow-hidden relative">
-<div class="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-<div class="flex items-center gap-3 relative z-10">
-<span class="material-symbols-outlined text-on-surface/40 group-hover:rotate-180 transition-transform duration-1000" data-icon="settings">settings</span>
-<span class="font-headline text-[10px] tracking-widest text-on-surface/30">SYSTEM.CFG</span>
+<div class="glass-panel p-6 rounded-2xl md:col-span-2 overflow-hidden relative min-h-[160px]">
+<div class="flex justify-between items-start relative z-10">
+<div>
+<p class="font-label text-xs font-bold text-on-surface-variant tracking-[0.2em] mb-1">SEASON 04 EVENT</p>
+<h3 class="font-headline text-3xl font-black text-on-surface uppercase leading-tight">CHROME DUST<br/>TOURNAMENT</h3>
 </div>
-<h3 class="font-headline text-lg font-semibold text-on-surface/80 group-hover:text-primary transition-colors relative z-10">SETTINGS</h3>
+<div class="bg-secondary/20 px-3 py-1 rounded-full">
+<span class="font-headline text-[10px] font-black text-secondary uppercase tracking-widest">LIVE NOW</span>
 </div>
 </div>
-<!-- Social/Community: Mini Bento -->
-<div class="md:col-span-7 flex gap-6">
-<div class="flex-1 rounded-xl bg-surface-container-low border border-outline-variant/5 p-6 flex items-center justify-center hover:bg-secondary/10 hover:border-secondary/20 transition-all cursor-pointer group">
-<span class="font-headline text-xs tracking-[0.3em] text-on-surface/30 group-hover:text-secondary transition-colors group-hover:tracking-[0.4em]">COMMUNITY</span>
+<div class="mt-4 relative z-10">
+<button class="text-xs font-bold font-headline text-primary border-b-2 border-primary/30 hover:border-primary transition-all pb-0.5">JOIN TOURNAMENT</button>
 </div>
-<div class="flex-1 rounded-xl bg-surface-container-low border border-outline-variant/5 p-6 flex items-center justify-center hover:bg-tertiary/10 hover:border-tertiary/20 transition-all cursor-pointer group">
-<span class="font-headline text-xs tracking-[0.3em] text-on-surface/30 group-hover:text-tertiary transition-colors group-hover:tracking-[0.4em]">TUTORIAL</span>
-</div>
+<!-- Abstract Graphic -->
+<div class="absolute right-0 bottom-0 top-0 w-1/3 opacity-30 bg-gradient-to-l from-secondary/40 to-transparent"></div>
+<img alt="Tournament Art" class="absolute top-0 right-0 w-full h-full object-cover opacity-20 mix-blend-screen pointer-events-none" data-alt="Futuristic chrome blocks floating in a purple nebula with digital data streams and light streaks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUm2Q0EcfnEQg34_iKaTcL4CymcZiMztvSB08-okJ91SVGrqqJze09Wqw1yYcfh8PQKcMWMlJtA90A1E34XMg5L4uksyBnvNAjUDk3TfTLiGpZSJXGFL8kh9ddk9V2G8BeGICvVY8-KzhH2dFENPRHrsCbI4X01PZgwIav_5-3np0U5zkQ98WPdeonbkMdG4m-GE9y9Jip5ZzQZk8Xj1EK4vuy2LmxY_SCo2QDxpLp5UgLF8F6iaWA1XnhuQ4h6WRx6uw0C73aZw"/>
 </div>
 </div>
 </main>
-<!-- Shared Component: BottomNavBar (Active state: NONE since it's a menu but standard is PLAY) -->
-<footer class="fixed bottom-0 w-full rounded-t-2xl z-50 bg-[#131319]/90 backdrop-blur-2xl border-t border-[#f9f5fd]/10 shadow-[0_-10px_40px_rgba(0,240,255,0.05)] md:hidden">
-<div class="flex justify-around items-center pt-3 pb-6 px-4 w-full">
-<!-- Destination: PLAY -->
-<div class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90 transition-transform">
-<span class="material-symbols-outlined text-2xl" data-icon="play_arrow">play_arrow</span>
-<span class="font-headline text-[10px] font-semibold tracking-widest mt-1">PLAY</span>
+<!-- Navigation Shell (BottomNavBar) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#131319]/80 backdrop-blur-xl md:hidden">
+<div class="flex flex-col items-center justify-center bg-[#25252d] text-[#00F0FF] rounded-xl px-4 py-1 shadow-[0_0_15px_rgba(0,240,255,0.3)] active:scale-90 duration-150 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="videogame_asset" data-weight="fill">videogame_asset</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">PLAY</span>
 </div>
-<!-- Destination: SCORES -->
-<div class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90 transition-transform">
-<span class="material-symbols-outlined text-2xl" data-icon="emoji_events">emoji_events</span>
-<span class="font-headline text-[10px] font-semibold tracking-widest mt-1">SCORES</span>
+<div class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all active:scale-90 duration-150 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">LEVELS</span>
 </div>
-<!-- Destination: SETTINGS -->
-<div class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90 transition-transform">
-<span class="material-symbols-outlined text-2xl" data-icon="settings">settings</span>
-<span class="font-headline text-[10px] font-semibold tracking-widest mt-1">SETTINGS</span>
+<div class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all active:scale-90 duration-150 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">LEADERS</span>
 </div>
+<div class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all active:scale-90 duration-150 ease-out cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">PROFILE</span>
 </div>
-</footer>
-<!-- Toast Notification (Asymmetric - Bottom Left) -->
-<div class="fixed bottom-10 left-10 z-50 max-w-xs md:block hidden animate-in slide-in-from-left duration-500">
-<div class="bg-surface-container-highest/80 border border-primary/20 rounded-lg p-4 shadow-2xl backdrop-blur-lg">
-<div class="flex items-start gap-4">
-<div class="w-2 h-2 rounded-full bg-primary mt-1.5 animate-pulse shadow-[0_0_8px_#8ff5ff]"></div>
-<div>
-<p class="font-headline text-[10px] tracking-widest text-on-surface/40 uppercase mb-1">Status</p>
-<p class="text-xs text-on-surface font-medium leading-relaxed">Neural engine synchronized. Welcome back, Player 01.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Hidden Image Data Alts for Generation Context -->
-<div class="hidden">
-<img data-alt="abstract kinetic 3d neon glass tetris blocks floating in a dark digital void with soft volumetric cyan and magenta lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ105vhu0JOGpbNjMQU6T43EsAOHGC1rl-K0Xyzpg-h5gwQNWB6sn5IqKSniqR-ndL1b9wRPPo-5bBt0SZkJxBOlmJl_iNin1phYkBJ6GnVSjIocLZRhyD-t8SdmIEl2QJdEzyBdCMZQ_8tVCMshS3_p4MvvnpTbk480Esl2UeROjY8ur-GmliosmfL1WjLL60P55EwPExyftyAiWZkisg2h5xOQDspFEylq_12sIDCz0qugtG8wAUIwSm98SPuuXDPlouR5rfbA"/>
-</div>
+</nav>
 </body></html>

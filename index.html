@@ -3,372 +3,419 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>TETRIS NEON - Kinetic Play</title>
+    <title>TETRIS NEON - Kinetic Kinetic</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕹️</text></svg>">
     
     <!-- Scripts & Fonts -->
-    <link rel="stylesheet" href="dist/output.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <link rel="stylesheet" href="style.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#76747b",
+                        "background": "#0e0e13",
+                        "on-secondary-fixed": "#530082",
+                        "on-secondary-container": "#fff5ff",
+                        "surface-container": "#19191f",
+                        "surface-dim": "#0e0e13",
+                        "outline-variant": "#48474d",
+                        "primary-fixed": "#00eefc",
+                        "surface": "#0e0e13",
+                        "on-secondary-fixed-variant": "#7c00c0",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-container": "#9000de",
+                        "on-tertiary-fixed-variant": "#0d6200",
+                        "inverse-primary": "#006a71",
+                        "primary-dim": "#00deec",
+                        "on-surface-variant": "#acaab1",
+                        "on-error": "#490006",
+                        "error": "#ff716c",
+                        "on-primary": "#005d63",
+                        "secondary-fixed-dim": "#e1b2ff",
+                        "on-tertiary": "#0d6100",
+                        "on-primary-container": "#005359",
+                        "tertiary": "#8eff71",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-background": "#f9f5fd",
+                        "primary": "#8ff5ff",
+                        "primary-container": "#00eefc",
+                        "inverse-on-surface": "#55545b",
+                        "tertiary-container": "#2ff801",
+                        "on-surface": "#f9f5fd",
+                        "error-dim": "#d7383b",
+                        "on-primary-fixed": "#003f43",
+                        "tertiary-fixed": "#2ff801",
+                        "surface-variant": "#25252d",
+                        "surface-bright": "#2c2b33",
+                        "secondary-dim": "#aa30fa",
+                        "surface-container-low": "#131319",
+                        "inverse-surface": "#fcf8ff",
+                        "tertiary-fixed-dim": "#2be800",
+                        "on-tertiary-fixed": "#064200",
+                        "on-secondary": "#350056",
+                        "secondary": "#c97cff",
+                        "surface-container-highest": "#25252d",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-dim": "#2be800",
+                        "on-tertiary-container": "#0b5800",
+                        "error-container": "#9f0519",
+                        "secondary-fixed": "#e9c4ff",
+                        "primary-fixed-dim": "#00deec",
+                        "surface-tint": "#8ff5ff",
+                        "surface-container-high": "#1f1f26"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .neon-glow-primary {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        .neon-glow-secondary {
+            text-shadow: 0 0 10px rgba(201, 124, 255, 0.5), 0 0 20px rgba(201, 124, 255, 0.3);
+        }
+        .glass-panel {
+            background: rgba(37, 37, 45, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(143, 245, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(143, 245, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .game-grid {
+            background-image: 
+                linear-gradient(to right, rgba(143, 245, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(143, 245, 255, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .solid-cube {
+            position: relative;
+            background: var(--block-color);
+            box-sizing: border-box;
+            margin: 0.5px;
+            width: 23px;
+            height: 23px;
+            box-shadow: 
+                inset 2px 2px 0px rgba(255, 255, 255, 0.5),
+                inset -3px -3px 0px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.4);
+        }
+        .piece-active .solid-cube {
+            filter: saturate(1.5) brightness(1.1);
+        }
+        @keyframes shockwave {
+            0% { transform: scale(0.5); opacity: 1; border-width: 8px; }
+            100% { transform: scale(3.5); opacity: 0; border-width: 1px; }
+        }
+        .shockwave {
+            position: absolute;
+            border: 2px solid var(--impact-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 50;
+            animation: shockwave 0.5s cubic-bezier(0, 0.5, 0.5, 1) forwards;
+        }
+        @keyframes heavy-shake {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-3px, -2px); }
+            20% { transform: translate(3px, 2px); }
+            30% { transform: translate(-3px, 1px); }
+            40% { transform: translate(2px, -1px); }
+            50% { transform: translate(-1px, 2px); }
+            60% { transform: translate(1px, -2px); }
+            100% { transform: translate(0, 0); }
+        }
+        .landed-impact-shake {
+            animation: heavy-shake 0.25s ease-out;
+        }
+        .dpad-btn:active {
+            background-color: rgba(0, 240, 255, 0.15);
+            border-color: #00F0FF;
+            color: #00F0FF;
+            transform: scale(0.95);
+        }
+        #game-board-container div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body {
+            background-color: #0e0e13;
+            min-height: max(884px, 100dvh);
+            overflow-x: hidden;
+        }
+    </style>
 </head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen overflow-x-hidden">
+<body class="font-body text-on-surface selection:bg-primary selection:text-on-primary">
 
-<!-- Background Layer: Kinetic Neon Gallery -->
-<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-    <div class="absolute inset-0 neon-grid opacity-30"></div>
-    <!-- Floating Decorative Tetrominoes -->
-    <div class="absolute top-[15%] left-[10%] w-16 h-16 rounded-lg bg-primary/10 border border-primary/20 backdrop-blur-sm floating-element blur-[1px]" style="--rot: -12deg; animation-delay: 0s;"></div>
-    <div class="absolute bottom-[20%] right-[15%] w-24 h-12 rounded-lg bg-secondary/10 border border-secondary/20 backdrop-blur-sm floating-element blur-[2px]" style="--rot: 45deg; animation-delay: 1s;"></div>
-    <div class="absolute top-[60%] left-[5%] w-12 h-20 rounded-lg bg-tertiary/10 border border-tertiary/20 backdrop-blur-sm floating-element blur-[1px]" style="--rot: 110deg; animation-delay: 2.5s;"></div>
-    <!-- Particles -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div class="w-2 h-2 rounded-full bg-primary/40 absolute top-1/4 left-1/3 blur-sm animate-pulse"></div>
-        <div class="w-1 h-1 rounded-full bg-secondary/40 absolute bottom-1/3 right-1/4 blur-none animate-bounce" style="animation-duration: 4s;"></div>
-        <div class="w-3 h-3 rounded-full bg-tertiary/20 absolute top-2/3 left-1/2 blur-md animate-pulse" style="animation-duration: 5s;"></div>
+<!-- Shared Background Logic -->
+<div id="shared-bg" class="fixed inset-0 z-0 grid-bg overflow-hidden pointer-events-none">
+    <div class="absolute top-[20%] right-[15%] opacity-15 -rotate-45">
+        <div class="flex flex-col gap-1">
+            <div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+            <div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+            <div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+            <div class="w-10 h-10 bg-primary rounded-sm shadow-[0_0_15px_#8ff5ff]"></div>
+        </div>
     </div>
-    <!-- Large Ambient Glows -->
-    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"></div>
-    <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-[30%] left-[5%] opacity-10 rotate-180">
+        <div class="grid grid-cols-3 gap-1">
+            <div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+            <div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+            <div class="w-10 h-10 bg-transparent"></div>
+            <div class="w-10 h-10 bg-transparent"></div>
+            <div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+            <div class="w-10 h-10 bg-tertiary rounded-sm shadow-[0_0_15px_#8eff71]"></div>
+        </div>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none"></div>
 </div>
 
-<!-- Shared Top App Bar -->
-<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
-    <div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
-        <div class="flex items-center gap-4">
-            <button id="menu-btn" class="text-[#00F0FF] hover:scale-105 transition-transform duration-300 active:scale-95">
-                <span class="material-symbols-outlined">menu</span>
-            </button>
-            <span class="font-headline tracking-widest uppercase text-sm text-[#00F0FF] hidden md:inline-block">SYSTEM_OS</span>
-        </div>
-        <div class="text-xl font-bold tracking-tighter text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.5)] font-headline italic">
+<!-- Shared TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-6 py-4 bg-[#0e0e13]/80 backdrop-blur-xl">
+    <div class="flex items-center gap-4">
+        <span id="menu-toggle" class="material-symbols-outlined text-[#00F0FF] cursor-pointer hover:text-[#8ff5ff] transition-colors active:scale-95 duration-100">menu</span>
+        <div class="font-headline text-2xl font-black italic tracking-tighter text-[#00F0FF] drop-shadow-[0_0_10px_rgba(0,240,255,0.5)] uppercase">
             TETRIS NEON
         </div>
-        <div class="flex items-center gap-6">
-            <nav class="hidden md:flex gap-8">
-                <span class="font-headline text-sm tracking-widest text-[#00F0FF] drop-shadow-md cursor-default">HOME</span>
-                <span class="font-headline text-sm tracking-widest text-[#f9f5fd]/40 hover:text-[#00F0FF] transition-colors cursor-pointer">ARCHIVE</span>
-            </nav>
-            <button id="nav-leaderboard-btn" class="text-[#00F0FF] hover:scale-105 transition-transform duration-300 active:scale-95">
-                <span class="material-symbols-outlined">leaderboard</span>
-            </button>
-        </div>
     </div>
-    <div class="bg-gradient-to-b from-[#131319] to-transparent h-1"></div>
+    <div class="flex items-center gap-6">
+        <span class="hidden md:block font-headline text-slate-500 tracking-tighter uppercase font-bold text-sm hover:text-[#8ff5ff] transition-colors cursor-pointer nav-link" data-target="leaderboard">RANKING</span>
+        <span class="material-symbols-outlined text-[#00F0FF] cursor-pointer hover:text-[#8ff5ff] transition-colors active:scale-95 duration-100">settings</span>
+    </div>
 </header>
 
-<!-- Main Menu Screen -->
-<section id="main-menu-screen" class="relative z-10 flex flex-col items-center justify-center min-h-screen pt-16 pb-24 px-6">
-    <div class="mb-20 text-center">
-        <div class="inline-block relative">
-            <h1 class="font-headline text-7xl md:text-9xl font-bold tracking-tighter text-on-surface leading-none">
-                <span class="block text-glow-layered opacity-90">TETRIS</span>
-                <span class="text-primary block -mt-2 drop-shadow-[0_0_35px_rgba(143,245,255,0.6)] animate-[neon-flicker_4s_infinite]">NEON</span>
+<!-- MAIN MENU SCREEN -->
+<section id="screen-menu" class="relative z-10 min-h-screen flex flex-col items-center justify-center pt-24 pb-32 px-6">
+    <div class="w-full max-w-4xl flex flex-col items-center mb-16 text-center">
+        <div class="relative group">
+            <h1 class="font-headline text-[8rem] md:text-[12rem] font-black tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary-container to-secondary leading-none select-none drop-shadow-[0_0_40px_rgba(0,240,255,0.4)]">
+                TETRIS
             </h1>
-            <div class="absolute -right-8 top-4 md:-right-12 font-headline text-xs font-bold tracking-[0.3em] text-secondary uppercase vertical-text transform rotate-90 origin-left opacity-80">
-                V.2024.KINETIC
-            </div>
-        </div>
-        <div class="mt-8 flex flex-col items-center gap-2">
-            <div class="h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
-            <p class="font-headline text-sm tracking-[0.5em] text-on-surface/60 uppercase">Digital Art Installation</p>
-            <div class="h-px w-12 bg-gradient-to-r from-transparent via-secondary/40 to-transparent"></div>
-        </div>
-    </div>
-
-    <!-- Main Navigation Grid -->
-    <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-6">
-        <div id="start-game-card" class="md:col-span-8 group cursor-pointer">
-            <div class="relative overflow-hidden rounded-xl bg-primary-container p-8 h-48 flex flex-col justify-end transition-all duration-500 hover:scale-[1.03] pulse-glow">
-                <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
-                <div class="absolute top-6 right-6 transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
-                    <span class="material-symbols-outlined text-6xl text-on-primary/30" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-                </div>
-                <div class="relative z-10">
-                    <span class="font-headline text-xs tracking-widest text-on-primary-fixed/70 block mb-1 group-hover:translate-x-1 transition-transform">INITIALIZE_CORE</span>
-                    <h2 class="font-headline text-4xl font-bold text-on-primary uppercase tracking-tight group-hover:drop-shadow-[0_0_15px_rgba(0,63,67,0.4)] transition-all">START GAME</h2>
-                </div>
-                <div class="absolute -bottom-4 right-20 w-32 h-16 bg-on-primary/10 rounded-lg rotate-12 transition-transform duration-700 group-hover:rotate-45 group-hover:scale-110"></div>
-            </div>
-        </div>
-        
-        <div id="leaderboard-card" class="md:col-span-4 group cursor-pointer">
-            <div class="h-48 rounded-xl bg-surface-container-high border border-outline-variant/10 p-6 flex flex-col justify-between transition-all duration-300 hover:bg-surface-container-highest hover:border-secondary/30">
-                <div class="flex justify-between items-start">
-                    <span class="material-symbols-outlined text-secondary drop-shadow-[0_0_8px_rgba(255,86,236,0.4)]">emoji_events</span>
-                    <span class="font-headline text-[10px] tracking-[0.2em] text-on-surface/30 uppercase">HIGH_SCORES</span>
-                </div>
-                <h3 class="font-headline text-xl font-bold tracking-tight text-on-surface group-hover:text-secondary transition-colors">LEADERBOARD</h3>
-            </div>
-        </div>
-        
-        <div class="md:col-span-5 group cursor-pointer">
-            <div class="h-40 rounded-xl bg-surface-container border border-outline-variant/10 p-6 flex flex-col justify-between transition-all duration-300 hover:border-primary/40 group overflow-hidden relative">
-                <div class="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-                <div class="flex items-center gap-3 relative z-10">
-                    <span class="material-symbols-outlined text-on-surface/40 group-hover:rotate-180 transition-transform duration-1000">settings</span>
-                    <span class="font-headline text-[10px] tracking-widest text-on-surface/30">SYSTEM.CFG</span>
-                </div>
-                <h3 class="font-headline text-lg font-semibold text-on-surface/80 group-hover:text-primary transition-colors relative z-10">SETTINGS</h3>
-            </div>
-        </div>
-        
-        <div class="md:col-span-7 flex gap-6">
-            <div class="flex-1 rounded-xl bg-surface-container-low border border-outline-variant/5 p-6 flex items-center justify-center hover:bg-secondary/10 hover:border-secondary/20 transition-all cursor-pointer group">
-                <span class="font-headline text-xs tracking-[0.3em] text-on-surface/30 group-hover:text-secondary transition-colors group-hover:tracking-[0.4em]">COMMUNITY</span>
-            </div>
-            <div class="flex-1 rounded-xl bg-surface-container-low border border-outline-variant/5 p-6 flex items-center justify-center hover:bg-tertiary/10 hover:border-tertiary/20 transition-all cursor-pointer group">
-                <span class="font-headline text-xs tracking-[0.3em] text-on-surface/30 group-hover:text-tertiary transition-colors group-hover:tracking-[0.4em]">TUTORIAL</span>
+            <div class="absolute -bottom-4 right-0 font-headline text-2xl font-bold tracking-[0.5em] text-secondary neon-glow-secondary opacity-80 uppercase">
+                NEON KINETIC
             </div>
         </div>
     </div>
-</section>
-
-<!-- Gameplay Screen -->
-<section id="game-play-screen" class="hidden relative z-10 min-h-screen pt-24 pb-32 px-4 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-    <aside class="hidden md:flex flex-col gap-8 self-start mt-12">
-        <div class="surface-container-high rounded-lg p-6 w-32 glass-panel border border-outline-variant/15">
-            <span class="font-label text-[10px] uppercase tracking-widest text-on-surface/40 block mb-4">HOLD</span>
-            <div id="hold-piece-container" class="aspect-square flex items-center justify-center bg-surface-container-lowest/50 rounded-lg">
-                <canvas id="hold-canvas" width="80" height="80"></canvas>
+    
+    <div class="w-full max-w-md space-y-4">
+        <button id="play-now-btn" class="w-full group relative overflow-hidden bg-gradient-to-r from-primary to-primary-container rounded-xl py-6 flex items-center justify-center shadow-[0_10px_30px_rgba(0,240,255,0.3)] hover:shadow-[0_15px_40px_rgba(0,240,255,0.5)] transition-all duration-300 active:scale-95">
+            <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative flex items-center gap-3">
+                <span class="material-symbols-outlined text-on-primary text-3xl">play_arrow</span>
+                <span class="font-headline text-3xl font-black text-on-primary tracking-tighter uppercase">PLAY NOW</span>
             </div>
-        </div>
-        <div class="surface-container-high rounded-lg p-6 w-32 glass-panel border border-outline-variant/15">
-            <span class="font-label text-[10px] uppercase tracking-widest text-on-surface/40 block mb-4">LEVEL</span>
-            <span id="level-val" class="font-headline text-3xl font-bold text-primary drop-shadow-[0_0_8px_rgba(143,245,255,0.4)]">1</span>
-        </div>
-    </aside>
-
-    <section class="relative group">
-        <div class="surface-container-low p-1.5 rounded-xl shadow-[0_0_80px_rgba(0,0,0,0.9)] border border-white/10 overflow-hidden">
-            <div id="game-board-container" class="relative grid grid-cols-10 grid-rows-20 gap-px bg-surface-container-lowest w-[280px] h-[560px] md:w-[320px] md:h-[640px] rounded-lg grid-glow">
-                <div class="absolute inset-0 scanline-grid z-10 opacity-40 pointer-events-none"></div>
-                <!-- Grid Cells (Generated by JS) -->
-            </div>
-        </div>
-        <div class="absolute -inset-10 bg-primary/10 blur-[100px] -z-10 rounded-full animate-pulse"></div>
-    </section>
-
-    <aside class="flex flex-row md:flex-col gap-6 md:gap-8 self-center md:self-end md:mb-12">
-        <div class="surface-container-high rounded-lg p-6 w-36 md:w-40 glass-panel border border-outline-variant/15">
-            <span class="font-label text-[10px] uppercase tracking-widest text-on-surface/40 block mb-4">NEXT</span>
-            <div class="aspect-square flex items-center justify-center bg-surface-container-lowest/50 rounded-lg">
-                <canvas id="next-canvas" width="100" height="100"></canvas>
-            </div>
-        </div>
-        <div class="surface-container-high rounded-lg p-6 w-44 md:w-48 glass-panel border border-outline-variant/15 shadow-xl">
-            <span class="font-label text-[10px] uppercase tracking-widest text-on-surface/40 block mb-2">SCORE</span>
-            <span id="score-val" class="font-headline text-3xl font-bold tracking-tight text-on-surface drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]">0</span>
-            <div class="mt-4 pt-4 border-t border-outline-variant/10">
-                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface/40 block mb-1">LINES</span>
-                <span id="lines-val" class="font-headline text-xl font-medium text-tertiary">0</span>
-            </div>
-        </div>
-    </aside>
-
-    <!-- Game Controls visibility fix: Always show on gameplay screen on mobile -->
-    <div class="fixed bottom-24 w-full px-6 z-40 md:hidden">
-        <div class="flex justify-between items-end max-w-md mx-auto">
-            <div class="grid grid-cols-3 gap-2">
-                <div class="col-span-3 h-2"></div>
-                <button id="ctrl-left" class="w-16 h-16 rounded-full control-btn flex items-center justify-center text-primary/80">
-                    <span class="material-symbols-outlined text-3xl">keyboard_arrow_left</span>
-                </button>
-                <button id="ctrl-down" class="w-16 h-16 rounded-full control-btn flex items-center justify-center text-primary/80">
-                    <span class="material-symbols-outlined text-3xl">keyboard_arrow_down</span>
-                </button>
-                <button id="ctrl-right" class="w-16 h-16 rounded-full control-btn flex items-center justify-center text-primary/80">
-                    <span class="material-symbols-outlined text-3xl">keyboard_arrow_right</span>
-                </button>
-            </div>
-            <button id="ctrl-rotate" class="w-24 h-24 rounded-full control-btn control-btn-magenta flex items-center justify-center text-secondary/80 border-secondary/30">
-                <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">rotate_right</span>
+        </button>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <button class="glass-panel flex flex-col items-start justify-end p-6 rounded-xl min-h-[140px] group transition-all hover:bg-surface-container-highest active:scale-95 shadow-lg nav-link" data-target="leaderboard">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform">leaderboard</span>
+                <div>
+                    <span class="block font-headline text-lg font-bold text-on-surface uppercase tracking-tight">LEADERBOARD</span>
+                    <span class="block font-body text-xs text-on-surface-variant font-medium">Rank #243</span>
+                </div>
+            </button>
+            <button class="glass-panel flex flex-col items-start justify-end p-6 rounded-xl min-h-[140px] group transition-all hover:bg-surface-container-highest active:scale-95 shadow-lg">
+                <span class="material-symbols-outlined text-tertiary text-4xl mb-4 group-hover:scale-110 transition-transform">sports_esports</span>
+                <div>
+                    <span class="block font-headline text-lg font-bold text-on-surface uppercase tracking-tight">LEVELS</span>
+                    <span class="block font-body text-xs text-on-surface-variant font-medium">12 Unlocked</span>
+                </div>
             </button>
         </div>
     </div>
 </section>
 
-<!-- Leaderboard Screen -->
-<section id="leaderboard-screen" class="hidden relative z-10 pt-24 pb-32 px-4 md:px-8 max-w-4xl mx-auto min-h-screen">
-    <div class="mb-12">
-        <span class="font-label text-xs tracking-[0.3em] text-primary opacity-60 uppercase mb-2 block">GLOBAL RANKINGS</span>
-        <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">HALL OF <span class="text-primary border-b border-primary/40 inline-block px-1">FAME</span></h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent rounded-full"></div>
-    </div>
-    
-    <div class="mb-8 relative group">
-        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <span class="material-symbols-outlined text-primary/60 group-focus-within:text-primary transition-colors">search</span>
-        </div>
-        <input id="player-search" name="player-search" class="w-full bg-[#131319]/60 border border-primary/20 rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all font-body tracking-wide shadow-[0_0_15px_rgba(0,240,255,0.05)] focus:shadow-[0_0_20px_rgba(0,240,255,0.15)] backdrop-blur-md" placeholder="Search player..." type="text"/>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div class="order-2 md:order-1 glass-panel p-6 rounded-xl border border-outline-variant/10 flex flex-col items-center justify-end h-64 relative overflow-hidden group">
-            <div class="absolute top-4 left-4 font-headline text-5xl font-extrabold opacity-10 italic group-hover:opacity-20 transition-opacity">02</div>
-            <div class="mb-4">
-                <span class="material-symbols-outlined text-4xl text-outline-variant" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
-            </div>
-            <span class="font-headline text-xl font-bold mb-1">CYBER_PUNK</span>
-            <span class="font-label text-sm text-primary">845,200</span>
-            <div class="absolute bottom-0 left-0 w-full h-1 bg-outline-variant/30"></div>
-        </div>
-        
-        <div class="order-1 md:order-2 glass-panel p-8 rounded-xl border-2 border-primary/30 flex flex-col items-center justify-center h-80 relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent">
-            <div class="absolute top-0 right-0 p-4">
-                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">stars</span>
+<!-- GAMEPLAY SCREEN -->
+<section id="screen-game" class="hidden relative z-10 min-h-screen pt-20 pb-28 px-4 flex flex-col items-center">
+    <main class="flex-grow flex flex-col pt-4 max-w-lg mx-auto w-full relative">
+        <div class="flex gap-4 items-start h-full">
+            <!-- Board -->
+            <div class="relative flex-grow aspect-[10/20] bg-surface-container-low rounded-xl overflow-hidden shadow-2xl outline-variant/10 outline outline-1" id="board-impact-container">
+                <div class="absolute inset-0 game-grid"></div>
+                <div id="game-board-container" class="absolute inset-0 p-1 grid grid-cols-10 grid-rows-20 gap-0">
+                    <!-- DOM cells will be injected here -->
                 </div>
+                <div id="impact-visuals" class="absolute inset-0 pointer-events-none z-40"></div>
             </div>
-            <div class="font-headline text-7xl font-black opacity-10 absolute -bottom-4 -left-4 italic">01</div>
-            <div class="mb-6 relative">
-                <div class="w-24 h-24 rounded-full border-2 border-tertiary p-1">
-                    <div class="w-full h-full bg-surface-container-highest rounded-full flex items-center justify-center">
-                      <span class="material-symbols-outlined text-4xl opacity-50">person</span>
+            
+            <!-- Side HUD -->
+            <div class="flex flex-col gap-4 w-28 shrink-0">
+                <div class="bg-surface-container-high rounded-xl p-4 flex flex-col items-end shadow-lg border border-outline-variant/10">
+                    <span class="text-on-surface-variant font-headline text-[10px] tracking-widest uppercase">SCORE</span>
+                    <span id="score-val" class="text-secondary font-headline text-2xl font-bold leading-tight">0</span>
+                </div>
+                <div class="bg-surface-container-high rounded-xl p-4 flex flex-col items-center gap-4 shadow-lg border border-outline-variant/10">
+                    <span class="text-on-surface-variant font-headline text-[10px] tracking-widest uppercase self-end">NEXT</span>
+                    <div id="next-piece-preview" class="flex items-center justify-center min-h-[4rem]">
+                        <canvas id="next-canvas" width="80" height="80"></canvas>
                     </div>
                 </div>
-                <div class="absolute -bottom-2 -right-2 bg-tertiary text-on-tertiary text-[10px] font-bold px-2 py-0.5 rounded-full">PRO</div>
+                <div class="bg-surface-container-high rounded-xl p-4 flex flex-col items-end shadow-lg mt-auto border border-outline-variant/10">
+                    <span class="text-on-surface-variant font-headline text-[10px] tracking-widest uppercase">LEVEL</span>
+                    <span id="level-val" class="text-primary font-headline text-2xl font-bold">1</span>
+                </div>
             </div>
-            <h3 class="font-headline text-2xl font-bold tracking-wide mb-1 uppercase">NEON_VOID</h3>
-            <span class="font-headline text-3xl font-black text-tertiary drop-shadow-[0_0_15px_rgba(188,255,95,0.4)]">1,240,500</span>
         </div>
         
-        <div class="order-3 glass-panel p-6 rounded-xl border border-outline-variant/10 flex flex-col items-center justify-end h-56 relative overflow-hidden group">
-            <div class="absolute top-4 left-4 font-headline text-5xl font-extrabold opacity-10 italic group-hover:opacity-20 transition-opacity">03</div>
-            <div class="mb-4">
-                <span class="material-symbols-outlined text-4xl text-secondary-container/60" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+        <!-- Controls -->
+        <div class="mt-8 grid grid-cols-12 gap-2 items-center h-40">
+            <div class="col-span-5 relative w-32 h-32 mx-auto">
+                <button id="ctrl-up" class="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary-container shadow-inner border border-outline-variant/20 transition-all dpad-btn">
+                    <span class="material-symbols-outlined">rotate_right</span>
+                </button>
+                <button id="ctrl-down" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary-container shadow-inner border border-outline-variant/20 transition-all dpad-btn">
+                    <span class="material-symbols-outlined">keyboard_arrow_down</span>
+                </button>
+                <button id="ctrl-left" class="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary-container shadow-inner border border-outline-variant/20 transition-all dpad-btn">
+                    <span class="material-symbols-outlined">keyboard_arrow_left</span>
+                </button>
+                <button id="ctrl-right" class="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-surface-container-highest rounded-lg flex items-center justify-center text-primary-container shadow-inner border border-outline-variant/20 transition-all dpad-btn">
+                    <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                </button>
             </div>
-            <span class="font-headline text-xl font-bold mb-1">GRID_RUNNER</span>
-            <span class="font-label text-sm text-secondary">712,000</span>
-            <div class="absolute bottom-0 left-0 w-full h-1 bg-secondary/30"></div>
+            <div class="col-span-2 flex justify-center">
+                <button id="ctrl-hard-drop" class="w-14 h-14 rounded-xl bg-surface-container-highest flex items-center justify-center text-tertiary shadow-[0_0_15px_rgba(47,248,1,0.2)] border border-tertiary/20 active:scale-90 transition-all relative overflow-hidden group">
+                    <span class="material-symbols-outlined text-3xl font-bold">vertical_align_bottom</span>
+                </button>
+            </div>
+            <div class="col-span-5 flex gap-3 justify-end items-center pr-2">
+                <button id="ctrl-hold" class="w-14 h-14 rounded-full bg-surface-container-highest text-primary flex items-center justify-center border border-primary/20 active:scale-95 transition-transform duration-150">
+                    <span class="material-symbols-outlined text-2xl">swap_horiz</span>
+                </button>
+                <button id="ctrl-rotate" class="w-16 h-16 rounded-full bg-gradient-to-br from-secondary to-secondary-container text-white flex items-center justify-center shadow-[0_6px_18px_rgba(201,124,255,0.3)] active:scale-95 transition-transform duration-150">
+                    <span class="material-symbols-outlined text-3xl">rotate_right</span>
+                </button>
+            </div>
+        </div>
+    </main>
+</section>
+
+<!-- LEADERBOARD SCREEN -->
+<section id="screen-leaderboard" class="hidden relative z-10 pt-24 pb-32 px-6 max-w-5xl mx-auto w-full min-h-screen">
+    <div class="mb-12 flex flex-col items-start">
+        <span class="font-label text-primary font-bold tracking-widest text-xs mb-2 uppercase">GLOBAL RANKINGS</span>
+        <h2 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-on-background uppercase italic leading-none">
+            Hall of <span class="text-tertiary">Neon</span>
+        </h2>
+    </div>
+    
+    <div class="bg-surface-container-low rounded-2xl p-1 md:p-4 mb-8">
+        <div class="flex items-center justify-between px-6 py-4 opacity-50 font-label text-[10px] uppercase font-bold tracking-widest">
+            <div class="flex gap-12">
+                <span class="w-8">RANK</span>
+                <span>PLAYER</span>
+            </div>
+            <span>SCORE</span>
+        </div>
+        <div id="leaderboard-list" class="space-y-2">
+            <!-- Simulated rankings -->
+            <div class="flex items-center justify-between px-6 py-5 bg-surface-container-highest rounded-xl border-l-4 border-primary shadow-[0_0_20px_rgba(0,240,255,0.15)] transform scale-[1.02]">
+                <div class="flex items-center gap-6">
+                    <span class="font-headline text-2xl font-black italic text-primary w-8">01</span>
+                    <div class="flex items-center gap-4">
+                        <span class="font-headline font-bold text-lg text-on-surface uppercase tracking-tight">CYBER_QUEEN</span>
+                    </div>
+                </div>
+                <span class="font-headline text-2xl font-black text-on-surface tracking-tighter">1,205,400</span>
+            </div>
         </div>
     </div>
     
-    <div class="space-y-3">
-        <div class="flex items-center px-6 py-2 opacity-40">
-            <div class="w-12 font-label text-[10px] tracking-widest uppercase">Rank</div>
-            <div class="flex-grow font-label text-[10px] tracking-widest uppercase px-4">Player</div>
-            <div class="w-32 text-right font-label text-[10px] tracking-widest uppercase">Score</div>
-        </div>
-        
-        <div class="flex items-center bg-surface-container-low/50 hover:bg-surface-container transition-colors rounded-lg px-6 py-4 group">
-            <div class="w-12 font-headline font-bold text-lg opacity-40 group-hover:text-primary group-hover:opacity-100 transition-all">04</div>
-            <div class="flex-grow flex items-center gap-3 px-4">
-                <div class="w-8 h-8 rounded-sm bg-surface-container-highest overflow-hidden"></div>
-                <span class="font-body font-semibold tracking-wide">HYPER_SPACE</span>
-            </div>
-            <div class="w-32 text-right font-headline font-bold text-on-surface/80 group-hover:text-primary transition-colors">654,200</div>
-        </div>
-        
-        <div class="flex items-center bg-surface-container-low/50 hover:bg-surface-container transition-colors rounded-lg px-6 py-4 group">
-            <div class="w-12 font-headline font-bold text-lg opacity-40 group-hover:text-primary group-hover:opacity-100 transition-all">05</div>
-            <div class="flex-grow flex items-center gap-3 px-4">
-                <div class="w-8 h-8 rounded-sm bg-surface-container-highest overflow-hidden"></div>
-                <span class="font-body font-semibold tracking-wide">BLOCK_MASTER</span>
-            </div>
-            <div class="w-32 text-right font-headline font-bold text-on-surface/80 group-hover:text-primary transition-colors">598,000</div>
-        </div>
-    </div>
-    
-    <div class="mt-16 flex flex-col items-center">
-        <button class="px-12 py-4 bg-gradient-to-r from-primary to-primary-container rounded-full font-headline text-sm font-bold tracking-widest text-[#003f43] uppercase hover:scale-105 transition-all active:scale-95 shadow-[0_0_20px_rgba(0,238,252,0.3)]">
-            JOIN THE FIGHT
+    <div class="flex justify-center">
+        <button class="bg-surface-container-highest text-on-surface py-4 px-12 rounded-xl font-headline font-bold uppercase tracking-widest border border-outline-variant/30 hover:bg-surface-bright active:scale-95 transition-all nav-link" data-target="menu">
+            BACK TO HOME
         </button>
-        <p class="mt-4 font-label text-[10px] opacity-40 tracking-widest uppercase">Your best rank: 1,402</p>
     </div>
 </section>
 
-<!-- Game Over Overlay -->
-<div id="game-over-overlay" class="fixed inset-0 z-[60] hidden bg-[#0e0e13]/90 backdrop-blur-md flex items-center justify-center p-6 transition-opacity duration-300">
-    <div class="relative z-10 w-full max-w-2xl mx-auto px-6">
-        <div class="glass-panel border border-outline-variant/10 rounded-3xl p-8 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col items-center">
-            
-            <div class="mb-12 text-center">
-                <span class="font-label text-sm tracking-[0.4em] text-primary/60 uppercase mb-4 block">Session Terminated</span>
-                <h2 class="font-headline text-6xl md:text-8xl font-black tracking-tighter text-on-surface" style="text-shadow: 0 0 10px rgba(143, 245, 255, 0.5), 0 0 20px rgba(143, 245, 255, 0.3);">
+<!-- GAME OVER OVERLAY -->
+<div id="game-over-overlay" class="fixed inset-0 z-[200] hidden bg-[#0e0e13]/90 backdrop-blur-xl flex items-center justify-center p-6">
+    <div class="w-full max-w-md bg-surface-container-lowest/60 backdrop-blur-2xl rounded-full p-1 shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-outline-variant/10 overflow-hidden scale-in">
+        <div class="bg-surface-container-high/40 p-8 md:p-12 flex flex-col items-center">
+            <div class="relative mb-12">
+                <h1 class="text-6xl md:text-8xl font-headline font-black italic tracking-tighter text-error drop-shadow-[0_0_20px_rgba(255,113,108,0.8)] leading-none text-center">
                     GAME OVER
-                </h2>
+                </h1>
+                <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-error to-transparent opacity-50"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mb-12">
-                <div class="bg-surface-container-high rounded-xl p-6 flex flex-col justify-between border-l-4 border-primary">
-                    <span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">Final Score</span>
-                    <div class="flex items-baseline gap-2 mt-2">
-                        <span id="final-score" class="font-headline text-4xl text-on-surface">0</span>
-                        <span class="text-primary text-sm font-label">PTS</span>
+            <div class="grid grid-cols-1 gap-4 w-full mb-12">
+                <div class="bg-surface-container-highest/50 p-6 rounded-xl flex justify-between items-end">
+                    <div>
+                        <p class="text-on-surface-variant text-xs font-headline uppercase tracking-widest mb-1">FINAL SCORE</p>
+                        <p id="final-score" class="text-4xl font-headline font-bold text-primary tracking-tight">0</p>
                     </div>
+                    <span class="material-symbols-outlined text-primary-dim text-3xl opacity-50">military_tech</span>
                 </div>
-                
-                <div class="bg-surface-container-high rounded-xl p-6 flex flex-col justify-between">
-                    <span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">Lines Cleared</span>
-                    <div class="flex items-baseline gap-2 mt-2">
-                        <span id="final-lines" class="font-headline text-4xl text-on-surface">0</span>
-                        <span class="text-tertiary text-sm font-label">MAX</span>
+                <div class="bg-surface-container-highest/50 p-6 rounded-xl flex justify-between items-end">
+                    <div>
+                        <p class="text-on-surface-variant text-xs font-headline uppercase tracking-widest mb-1">LINES CLEARED</p>
+                        <p id="final-lines" class="text-4xl font-headline font-bold text-secondary tracking-tight">0</p>
                     </div>
-                </div>
-                
-                <div class="bg-surface-container-high rounded-xl p-6 flex flex-col justify-between md:col-span-2 relative overflow-hidden">
-                    <div class="relative z-10 flex justify-between items-end">
-                        <div>
-                            <span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">Level Reached</span>
-                            <div id="final-level" class="font-headline text-2xl text-on-surface mt-1">1</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="flex items-center justify-end gap-1 text-secondary font-label text-xs uppercase mb-1">
-                                <span class="material-symbols-outlined text-sm">trending_up</span>
-                                Good Run
-                            </div>
-                        </div>
-                    </div>
+                    <span class="material-symbols-outlined text-secondary-dim text-3xl opacity-50">speed</span>
                 </div>
             </div>
             
-            <div class="flex flex-col md:flex-row gap-4 w-full">
-                <button id="replay-btn" class="flex-1 bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 px-8 rounded-full font-label text-sm font-bold tracking-widest uppercase hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(143,245,255,0.3)]">
-                    REPLAY
+            <div class="flex flex-col w-full gap-4">
+                <button id="replay-btn" class="w-full bg-gradient-to-br from-primary to-primary-container py-5 rounded-xl text-on-primary font-headline font-extrabold text-lg tracking-widest uppercase shadow-[0_0_30px_rgba(143,245,255,0.4)] active:scale-95 transition-all duration-100 hover:brightness-110">
+                    TRY AGAIN
                 </button>
-                <button id="menu-back-btn" class="flex-1 bg-surface-container-highest text-on-surface py-4 px-8 rounded-full font-label text-sm font-bold tracking-widest uppercase hover:bg-surface-bright active:scale-95 transition-all duration-300 border border-outline-variant/20">
-                    MAIN MENU
+                <button id="menu-back-btn" class="w-full bg-surface-container-highest/80 border border-outline-variant/30 py-5 rounded-xl text-on-surface font-headline font-bold text-lg tracking-widest uppercase active:scale-95 transition-all duration-100 hover:bg-surface-bright">
+                    HOME
                 </button>
             </div>
-            
         </div>
     </div>
 </div>
 
-<!-- Bottom Navigation Bar -->
-<footer class="fixed bottom-0 w-full rounded-t-2xl z-50 bg-[#131319]/90 backdrop-blur-2xl border-t border-[#f9f5fd]/10 shadow-[0_-10px_40px_rgba(0,240,255,0.05)] md:hidden">
-    <div class="flex justify-around items-center pt-3 pb-6 px-4 w-full">
-        <button id="footer-play-btn" class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90 transition-transform">
-            <span class="material-symbols-outlined text-2xl">play_arrow</span>
-            <span class="font-headline text-[10px] font-semibold tracking-widest mt-1">PLAY</span>
-        </button>
-        <button id="footer-leaderboard-btn" class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90 transition-transform">
-            <span class="material-symbols-outlined text-2xl">emoji_events</span>
-            <span class="font-headline text-[10px] font-semibold tracking-widest mt-1">SCORES</span>
-        </button>
-        <button class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90 transition-transform">
-            <span class="material-symbols-outlined text-2xl">settings</span>
-            <span class="font-headline text-[10px] font-semibold tracking-widest mt-1">SETTINGS</span>
-        </button>
+<!-- Bottom Navigation Shell (Mobile) -->
+<nav class="fixed bottom-0 w-full z-[100] flex justify-around items-center px-4 pb-6 pt-2 bg-[#131319]/80 backdrop-blur-xl md:hidden">
+    <div class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all nav-link" data-target="menu">
+        <span class="material-symbols-outlined pointer-events-none">home</span>
+        <span class="font-headline text-[10px] uppercase font-bold mt-1">HOME</span>
     </div>
-</footer>
-
-<!-- Toast Notification -->
-<div id="system-toast" class="fixed bottom-10 left-10 z-50 max-w-xs transition-opacity duration-500 opacity-0 pointer-events-none hidden md:block">
-    <div class="bg-surface-container-highest/80 border border-primary/20 rounded-lg p-4 shadow-2xl backdrop-blur-lg">
-        <div class="flex items-start gap-4">
-            <div class="w-2 h-2 rounded-full bg-primary mt-1.5 animate-pulse shadow-[0_0_8px_#8ff5ff]"></div>
-            <div>
-                <p class="font-headline text-[10px] tracking-widest text-on-surface/40 uppercase mb-1">Status</p>
-                <p id="system-toast-msg" class="text-xs text-on-surface font-medium leading-relaxed">Neural engine synchronized. Welcome back, Player 01.</p>
-            </div>
-        </div>
+    <div id="mobile-play-btn" class="flex flex-col items-center justify-center bg-[#25252d] text-[#00F0FF] rounded-xl px-4 py-1 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+        <span class="material-symbols-outlined pointer-events-none">videogame_asset</span>
+        <span class="font-headline text-[10px] uppercase font-bold mt-1">PLAY</span>
     </div>
-</div>
+    <div class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all nav-link" data-target="leaderboard">
+        <span class="material-symbols-outlined pointer-events-none">leaderboard</span>
+        <span class="font-headline text-[10px] uppercase font-bold mt-1">RANK</span>
+    </div>
+</nav>
 
 <script src="script.js"></script>
 </body>

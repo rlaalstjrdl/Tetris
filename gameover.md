@@ -3,229 +3,196 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "secondary": "#ff56ec",
-            "error-container": "#9f0519",
-            "surface-container-low": "#131319",
-            "on-primary-container": "#005359",
-            "primary-dim": "#00deec",
-            "outline": "#76747b",
-            "inverse-primary": "#006a71",
-            "surface": "#0e0e13",
-            "on-error-container": "#ffa8a3",
-            "on-tertiary-fixed": "#294300",
-            "on-tertiary": "#3d6100",
-            "surface-tint": "#8ff5ff",
-            "on-secondary-container": "#fff5f9",
-            "primary-fixed-dim": "#00deec",
-            "on-secondary-fixed": "#63005d",
-            "on-surface-variant": "#acaab1",
-            "surface-container-highest": "#25252d",
-            "on-background": "#f9f5fd",
-            "on-secondary": "#41003c",
-            "primary-fixed": "#00eefc",
-            "surface-container": "#19191f",
-            "inverse-on-surface": "#55545b",
-            "on-error": "#490006",
-            "tertiary": "#bcff5f",
-            "tertiary-container": "#a2f31f",
-            "background": "#0e0e13",
-            "primary": "#8ff5ff",
-            "tertiary-fixed-dim": "#95e400",
-            "surface-container-lowest": "#000000",
-            "error-dim": "#d7383b",
-            "surface-variant": "#25252d",
-            "secondary-dim": "#ff56ec",
-            "surface-bright": "#2c2b33",
-            "secondary-fixed": "#ffbdee",
-            "tertiary-fixed": "#a2f31f",
-            "on-primary-fixed": "#003f43",
-            "on-primary-fixed-variant": "#005e64",
-            "on-tertiary-container": "#365700",
-            "secondary-container": "#ab00a1",
-            "on-tertiary-fixed-variant": "#3d6200",
-            "error": "#ff716c",
-            "on-primary": "#005d63",
-            "inverse-surface": "#fcf8ff",
-            "on-secondary-fixed-variant": "#94008b",
-            "on-surface": "#f9f5fd",
-            "surface-dim": "#0e0e13",
-            "tertiary-dim": "#95e400",
-            "outline-variant": "#48474d",
-            "secondary-fixed-dim": "#ffa7ec",
-            "surface-container-high": "#1f1f26",
-            "primary-container": "#00eefc"
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#76747b",
+                    "background": "#0e0e13",
+                    "on-secondary-fixed": "#530082",
+                    "on-secondary-container": "#fff5ff",
+                    "surface-container": "#19191f",
+                    "surface-dim": "#0e0e13",
+                    "outline-variant": "#48474d",
+                    "primary-fixed": "#00eefc",
+                    "surface": "#0e0e13",
+                    "on-secondary-fixed-variant": "#7c00c0",
+                    "on-error-container": "#ffa8a3",
+                    "secondary-container": "#9000de",
+                    "on-tertiary-fixed-variant": "#0d6200",
+                    "inverse-primary": "#006a71",
+                    "primary-dim": "#00deec",
+                    "on-surface-variant": "#acaab1",
+                    "on-error": "#490006",
+                    "error": "#ff716c",
+                    "on-primary": "#005d63",
+                    "secondary-fixed-dim": "#e1b2ff",
+                    "on-tertiary": "#0d6100",
+                    "on-primary-container": "#005359",
+                    "tertiary": "#8eff71",
+                    "on-primary-fixed-variant": "#005e64",
+                    "on-background": "#f9f5fd",
+                    "primary": "#8ff5ff",
+                    "primary-container": "#00eefc",
+                    "inverse-on-surface": "#55545b",
+                    "tertiary-container": "#2ff801",
+                    "on-surface": "#f9f5fd",
+                    "error-dim": "#d7383b",
+                    "on-primary-fixed": "#003f43",
+                    "tertiary-fixed": "#2ff801",
+                    "surface-variant": "#25252d",
+                    "surface-bright": "#2c2b33",
+                    "secondary-dim": "#aa30fa",
+                    "surface-container-low": "#131319",
+                    "inverse-surface": "#fcf8ff",
+                    "tertiary-fixed-dim": "#2be800",
+                    "on-tertiary-fixed": "#064200",
+                    "on-secondary": "#350056",
+                    "secondary": "#c97cff",
+                    "surface-container-highest": "#25252d",
+                    "surface-container-lowest": "#000000",
+                    "tertiary-dim": "#2be800",
+                    "on-tertiary-container": "#0b5800",
+                    "error-container": "#9f0519",
+                    "secondary-fixed": "#e9c4ff",
+                    "primary-fixed-dim": "#00deec",
+                    "surface-tint": "#8ff5ff",
+                    "surface-container-high": "#1f1f26"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Space Grotesk"]
+            }
           },
-          fontFamily: {
-            "headline": ["Space Grotesk"],
-            "body": ["Manrope"],
-            "label": ["Space Grotesk"]
-          },
-          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
         },
-      },
-    }
-  </script>
+      }
+    </script>
 <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    .neon-glow-primary {
-      text-shadow: 0 0 10px rgba(143, 245, 255, 0.5), 0 0 20px rgba(143, 245, 255, 0.3);
-    }
-    .glass-panel {
-      backdrop-filter: blur(20px);
-      background: rgba(19, 19, 25, 0.7);
-    }
-  </style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .tetris-grid-bg {
+            background-image: linear-gradient(to right, rgba(72, 71, 77, 0.1) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(72, 71, 77, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
   </head>
-<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary selection:text-on-primary overflow-hidden">
-<!-- Top App Bar -->
-<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 w-full bg-[#0e0e13]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary min-h-screen overflow-hidden">
+<!-- Gameplay Background (Dimmed) -->
+<div class="fixed inset-0 z-0 overflow-hidden opacity-30 grayscale-[0.5] blur-[2px]">
+<div class="absolute inset-0 tetris-grid-bg"></div>
+<!-- Simulated Tetrominoes -->
+<div class="absolute bottom-[10%] left-[20%] w-40 h-20 bg-secondary-container opacity-40 rounded-sm shadow-[0_0_20px_rgba(201,124,255,0.4)]"></div>
+<div class="absolute bottom-[25%] left-[45%] w-20 h-40 bg-primary-container opacity-40 rounded-sm shadow-[0_0_20px_rgba(143,245,255,0.4)]"></div>
+<div class="absolute bottom-[15%] right-[25%] w-32 h-24 bg-tertiary-container opacity-40 rounded-sm shadow-[0_0_20px_rgba(142,255,113,0.4)]"></div>
+</div>
+<!-- Top Navigation Anchor -->
+<header class="bg-[#0e0e13] dark:bg-[#0e0e13] flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50">
 <div class="flex items-center gap-4">
-<button class="text-[#00F0FF] hover:scale-105 transition-transform duration-300 active:scale-95">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<h1 class="text-xl font-bold tracking-tighter text-[#00F0FF] drop-shadow-[0_0_8px_rgba(0,240,255,0.5)] font-['Space_Grotesk'] uppercase">TETRIS NEON</h1>
+<span class="material-symbols-outlined text-[#00F0FF]">menu</span>
+<span class="text-2xl font-black italic tracking-tighter text-[#00F0FF] drop-shadow-[0_0_10px_rgba(0,240,255,0.5)] font-headline uppercase">TETRIS NEON</span>
 </div>
 <div class="flex items-center gap-6">
-<button class="text-[#f9f5fd]/40 hover:scale-105 transition-transform duration-300 hover:text-[#00F0FF]">
-<span class="material-symbols-outlined">leaderboard</span>
-</button>
+<div class="hidden md:flex gap-8">
+<span class="text-[#00F0FF] font-headline tracking-tighter uppercase font-bold cursor-pointer hover:text-[#8ff5ff] transition-colors">PLAY</span>
+<span class="text-slate-500 font-headline tracking-tighter uppercase font-bold cursor-pointer hover:text-[#8ff5ff] transition-colors">LEVELS</span>
+<span class="text-slate-500 font-headline tracking-tighter uppercase font-bold cursor-pointer hover:text-[#8ff5ff] transition-colors">LEADERS</span>
+</div>
+<span class="material-symbols-outlined text-[#00F0FF]">settings</span>
 </div>
 </header>
-<!-- Background Game Simulation (Blurred) -->
-<main class="relative pt-24 pb-32 min-h-screen flex items-center justify-center overflow-hidden">
-<div class="absolute inset-0 z-0 opacity-20 scale-110 pointer-events-none grid grid-cols-10 gap-1 p-8 blur-sm">
-<!-- Simulated Tetris Grid -->
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-primary rounded-sm aspect-square shadow-[inset_0_0_8px_rgba(143,245,255,0.6)]"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-secondary rounded-sm aspect-square shadow-[inset_0_0_8px_rgba(255,86,236,0.6)]"></div>
-<div class="bg-secondary rounded-sm aspect-square shadow-[inset_0_0_8px_rgba(255,86,236,0.6)]"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-tertiary rounded-sm aspect-square shadow-[inset_0_0_8px_rgba(188,255,95,0.6)]"></div>
-<div class="bg-tertiary rounded-sm aspect-square shadow-[inset_0_0_8px_rgba(188,255,95,0.6)]"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-<div class="bg-surface-container-low rounded-sm aspect-square"></div>
-</div>
-<!-- Game Over Overlay -->
-<div class="relative z-10 w-full max-w-2xl mx-auto px-6">
-<div class="glass-panel border border-outline-variant/10 rounded-3xl p-8 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col items-center">
-<!-- Header Section -->
-<div class="mb-12 text-center">
-<span class="font-label text-sm tracking-[0.4em] text-primary/60 uppercase mb-4 block">Session Terminated</span>
-<h2 class="font-headline text-6xl md:text-8xl font-black tracking-tighter text-on-surface neon-glow-primary">
-            GAME OVER
-          </h2>
+<!-- Main Overlay Canvas -->
+<main class="relative z-10 flex items-center justify-center min-h-screen p-6">
+<!-- Game Over Modal -->
+<div class="w-full max-w-md bg-surface-container-lowest/60 backdrop-blur-xl rounded-full p-1 shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-outline-variant/10 overflow-hidden">
+<div class="bg-surface-container-high/40 p-8 md:p-12 flex flex-col items-center">
+<!-- Game Over Headline -->
+<div class="relative mb-12">
+<h1 class="text-6xl md:text-8xl font-headline font-black italic tracking-tighter text-error drop-shadow-[0_0_20px_rgba(255,113,108,0.8)] leading-none text-center">
+                        GAME OVER
+                    </h1>
+<div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-error to-transparent opacity-50"></div>
 </div>
 <!-- Stats Bento Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mb-12">
-<!-- Final Score Card -->
-<div class="bg-surface-container-high rounded-xl p-6 flex flex-col justify-between border-l-4 border-primary">
-<span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">Final Score</span>
-<div class="flex items-baseline gap-2 mt-2">
-<span class="font-headline text-4xl text-on-surface">124,500</span>
-<span class="text-primary text-sm font-label">PTS</span>
-</div>
-</div>
-<!-- Level Reached Card -->
-<div class="bg-surface-container-high rounded-xl p-6 flex flex-col justify-between">
-<span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">Level Reached</span>
-<div class="flex items-baseline gap-2 mt-2">
-<span class="font-headline text-4xl text-on-surface">18</span>
-<span class="text-tertiary text-sm font-label">MAX</span>
-</div>
-</div>
-<!-- High Score Comparison -->
-<div class="bg-surface-container-high rounded-xl p-6 flex flex-col justify-between md:col-span-2 relative overflow-hidden">
-<div class="relative z-10 flex justify-between items-end">
+<div class="grid grid-cols-1 gap-4 w-full mb-12">
+<div class="bg-surface-container-highest/50 p-6 rounded-xl flex justify-between items-end">
 <div>
-<span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">Personal Best</span>
-<div class="font-headline text-2xl text-on-surface mt-1">142,800</div>
+<p class="text-on-surface-variant text-xs font-headline uppercase tracking-widest mb-1">FINAL SCORE</p>
+<p class="text-4xl font-headline font-bold text-primary tracking-tight">128,450</p>
 </div>
-<div class="text-right">
-<div class="flex items-center gap-1 text-secondary font-label text-xs uppercase mb-1">
-<span class="material-symbols-outlined text-sm">trending_down</span>
-                  18,300 to record
-                </div>
-<div class="w-48 h-1 bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-primary" style="width: 87%;"></div>
+<span class="material-symbols-outlined text-primary-dim text-3xl opacity-50">military_tech</span>
 </div>
+<div class="bg-surface-container-highest/50 p-6 rounded-xl flex justify-between items-end">
+<div>
+<p class="text-on-surface-variant text-xs font-headline uppercase tracking-widest mb-1">LEVEL REACHED</p>
+<p class="text-4xl font-headline font-bold text-secondary tracking-tight">14</p>
 </div>
-</div>
+<span class="material-symbols-outlined text-secondary-dim text-3xl opacity-50">speed</span>
 </div>
 </div>
-<!-- Actions -->
-<div class="flex flex-col md:flex-row gap-4 w-full">
-<button class="flex-1 bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 px-8 rounded-full font-label text-sm font-bold tracking-widest uppercase hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(143,245,255,0.3)]">
-            REPLAY
-          </button>
-<button class="flex-1 bg-surface-container-highest text-on-surface py-4 px-8 rounded-full font-label text-sm font-bold tracking-widest uppercase hover:bg-surface-bright active:scale-95 transition-all duration-300 border border-outline-variant/20">
-            MAIN MENU
-          </button>
+<!-- Action Buttons -->
+<div class="flex flex-col w-full gap-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container py-5 rounded-xl text-on-primary font-headline font-extrabold text-lg tracking-widest uppercase shadow-[0_0_30px_rgba(143,245,255,0.4)] active:scale-95 transition-all duration-100 hover:brightness-110">
+                        TRY AGAIN
+                    </button>
+<button class="w-full bg-surface-container-highest/80 border border-outline-variant/30 py-5 rounded-xl text-on-surface font-headline font-bold text-lg tracking-widest uppercase active:scale-95 transition-all duration-100 hover:bg-surface-bright">
+                        HOME
+                    </button>
 </div>
-<!-- Decorative Metadata -->
-<div class="mt-8 flex gap-8">
-<div class="flex items-center gap-2 opacity-30">
-<span class="material-symbols-outlined text-xs">timer</span>
-<span class="font-label text-[10px] tracking-widest uppercase">Time: 12:44</span>
-</div>
-<div class="flex items-center gap-2 opacity-30">
-<span class="material-symbols-outlined text-xs">layers</span>
-<span class="font-label text-[10px] tracking-widest uppercase">Lines: 154</span>
-</div>
+<!-- Personal Best Indicator -->
+<div class="mt-8 flex items-center gap-2 text-on-surface-variant/60">
+<span class="material-symbols-outlined text-sm">history</span>
+<p class="text-[10px] font-headline uppercase tracking-widest">PERSONAL BEST: 142,000</p>
 </div>
 </div>
 </div>
 </main>
-<!-- Bottom Navigation -->
-<nav class="fixed bottom-0 w-full flex justify-around items-center pt-3 pb-6 px-4 bg-[#131319]/90 backdrop-blur-2xl border-t border-[#f9f5fd]/10 z-50">
-<a class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90" href="#">
-<span class="material-symbols-outlined mb-1">play_arrow</span>
-<span class="font-['Space_Grotesk'] text-[10px] font-semibold tracking-widest uppercase">PLAY</span>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#131319]/80 backdrop-blur-xl md:hidden">
+<a class="flex flex-col items-center justify-center bg-[#25252d] text-[#00F0FF] rounded-xl px-4 py-1 shadow-[0_0_15px_rgba(0,240,255,0.3)]" href="#">
+<span class="material-symbols-outlined" data-icon="videogame_asset">videogame_asset</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">PLAY</span>
 </a>
-<a class="flex flex-col items-center justify-center text-[#00F0FF] drop-shadow-[0_0_10px_rgba(0,240,255,0.6)] scale-110 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">emoji_events</span>
-<span class="font-['Space_Grotesk'] text-[10px] font-semibold tracking-widest uppercase">SCORES</span>
+<a class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">LEVELS</span>
 </a>
-<a class="flex flex-col items-center justify-center text-[#f9f5fd]/30 hover:text-[#8ff5ff] transition-colors active:scale-90" href="#">
-<span class="material-symbols-outlined mb-1">settings</span>
-<span class="font-['Space_Grotesk'] text-[10px] font-semibold tracking-widest uppercase">SETTINGS</span>
+<a class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">LEADERS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:bg-[#25252d] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase font-bold">PROFILE</span>
 </a>
 </nav>
+<!-- Background Decoration -->
+<div class="fixed top-20 right-[-10%] w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-20 left-[-10%] w-96 h-96 bg-secondary/10 blur-[120px] rounded-full pointer-events-none"></div>
 </body></html>
