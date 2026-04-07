@@ -16,13 +16,13 @@ const SHAPES = [
 
 const COLORS = [
     '',
-    '#00FFFF', // I - Cyan
-    '#0000FF', // J - Blue
-    '#FF8C00', // L - Orange
-    '#FFD700', // O - Yellow
-    '#32CD32', // S - Green
-    '#9370DB', // T - Purple
-    '#FF0000'  // Z - Red
+    '#00F0FF', // I - Cyan (Electric)
+    '#007BFF', // J - Blue (Cobalt)
+    '#FF9F00', // L - Orange (Amber)
+    '#FFEA00', // O - Yellow (Laser)
+    '#00FF41', // S - Green (Matrix)
+    '#BC00FF', // T - Purple (Phantom)
+    '#FF003C'  // Z - Red (Crimson)
 ];
 
 // Game State
@@ -291,7 +291,7 @@ function draw() {
                     const idx = (ghostY + yp) * cols + (player.pos.x + xp);
                     if (gridCells[idx] && gridCells[idx].innerHTML === '') {
                         const cube = document.createElement('div');
-                        cube.className = 'solid-cube opacity-20';
+                        cube.className = 'solid-cube opacity-10 scale-[0.9] blur-[0.5px]';
                         cube.style.setProperty('--block-color', COLORS[value]);
                         gridCells[idx].appendChild(cube);
                     }

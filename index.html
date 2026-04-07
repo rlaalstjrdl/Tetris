@@ -115,22 +115,23 @@
             background-size: 40px 40px;
         }
         .game-grid {
+            /* Responsive grid lines that match 10x20 columns/rows */
             background-image: 
                 linear-gradient(to right, rgba(143, 245, 255, 0.08) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(143, 245, 255, 0.08) 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-size: 10% 5%;
         }
         .solid-cube {
             position: relative;
             background: var(--block-color);
             box-sizing: border-box;
-            margin: 0.5px;
-            width: 23px;
-            height: 23px;
+            width: 100%;
+            height: 100%;
             box-shadow: 
                 inset 2px 2px 0px rgba(255, 255, 255, 0.5),
                 inset -3px -3px 0px rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(0, 0, 0, 0.4);
+            transform: scale(0.98); /* Tiny gap to simulate real blocks */
         }
         .piece-active .solid-cube {
             filter: saturate(1.5) brightness(1.1);
@@ -265,7 +266,7 @@
             <!-- Board -->
             <div class="relative flex-grow aspect-[10/20] bg-surface-container-low rounded-xl overflow-hidden shadow-2xl outline-variant/10 outline outline-1" id="board-impact-container">
                 <div class="absolute inset-0 game-grid"></div>
-                <div id="game-board-container" class="absolute inset-0 p-1 grid grid-cols-10 grid-rows-20 gap-0">
+                <div id="game-board-container" class="absolute inset-0 grid grid-cols-10 grid-rows-20 gap-0">
                     <!-- DOM cells will be injected here -->
                 </div>
                 <div id="impact-visuals" class="absolute inset-0 pointer-events-none z-40"></div>
